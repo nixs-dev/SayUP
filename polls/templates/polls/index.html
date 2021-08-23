@@ -1,0 +1,43 @@
+{% load static %}
+
+<html>
+	<head>
+		<title>Vote</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+		<link href="{% static 'styles/polls.css' %}" rel="stylesheet">
+	</head>
+	<body>
+		<div class="pollsContainer">
+			{{ polls }}
+		</div>
+	</body>
+	<script type="text/javascript">
+		function sendVote(form, option) {
+			o = option.id
+			form.querySelector('#optionSelected').value = o
+
+			formdata = new FormData(form);
+
+			$.ajax({
+				url: "vote",
+				type: "POST",
+				data: formdata,
+			    processData: false,
+			    contentType: false,
+				success: function(result){
+			    	$.ajax({
+						url: "polls",
+						type: "GET",
+						contentType: "json",
+						success: function(result){
+							updatePolls(result['calculatedChoices'])
+					 	}
+			 		});
+			 	}
+			 });
+		}
+	</script>
+</html>

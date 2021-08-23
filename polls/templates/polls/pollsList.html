@@ -1,0 +1,54 @@
+{% for i in questions %}
+	<div class="card w-25 my-2">
+		<div class="card-header">
+			{{ i.question_text }}
+		</div>
+		<div class="card-body p-5">
+			<form id="poll{{ i.id }}">
+				{% csrf_token %}
+
+				<input type="hidden" id="poll" name="poll" value="poll{{ i.id }}">
+				<input type="hidden" id="optionSelected" name="vote">
+
+				<div class="pollOption border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode ,this)" id="op1">
+					{{ i.op1 }}
+					<div class="voteQuantifier border rounded">
+					</div>
+				</div>
+				<div class="pollOption border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode ,this)" id="op2">
+					{{ i.op2 }}
+					<div class="voteQuantifier border rounded">
+					</div>
+				</div>
+				<div class="pollOption border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode ,this)" id="op3">
+					{{ i.op3 }}
+					<div class="voteQuantifier border rounded">
+					</div>
+				</div>
+				<div class="pollOption border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode ,this)" id="op4">
+					{{ i.op4 }}
+					<div class="voteQuantifier border rounded">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endfor %}
+<script>
+	updatePolls({{ choices }});
+
+	function updatePolls(choices) {
+
+		for (const [key, value] of Object.entries(choices)) {
+			elem = document.getElementById('poll' + key.toString())
+			options = value;
+
+			options.forEach((quant, i) => {
+				if(i < options.length-1) {
+
+				elem.querySelector('#op' + (i+1).toString()).querySelector('.voteQuantifier').style = 'width: ' + quant.toString() + '%';
+				}
+			});
+		}
+	}
+</script>
