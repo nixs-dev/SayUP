@@ -77,3 +77,7 @@ body {
 	border: 2mm ridge rgb(115, 115, 115);
 	cursor: pointer;
 }
+
+.sideBar .userOptions .userOption:hover {
+	color: blueviolet;
+}

@@ -1,5 +1,9 @@
 body {
-	background-color: green;
+	background: url("../imgs/authBackground.jpeg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .mainContainer {
@@ -15,4 +19,13 @@ body {
 	flex-direction: column;
 	justify-items: center;
 	text-align: center;
+}
+
+.mainContainer label {
+	font-family: BehindTS;
+	font-size: 70px;
+}
+
+.mainContainer form input {
+	box-shadow: 10px 5px 5px #666666;
 }
