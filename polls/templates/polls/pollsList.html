@@ -1,6 +1,6 @@
 {% for i in questions %}
-	<div class="card w-25 my-2">
-		<div class="card-header">
+	<div class="card w-75 my-2">
+		<div class="card-header" style="background-color: #80ffff;">
 			{{ i.question_text }}
 		</div>
 		<div class="card-body p-5">
@@ -40,15 +40,29 @@
 	function updatePolls(choices) {
 
 		for (const [key, value] of Object.entries(choices)) {
+
 			elem = document.getElementById('poll' + key.toString())
 			options = value;
 
 			options.forEach((quant, i) => {
-				if(i < options.length-1) {
+				if(i < options.length-2) {
 
-				elem.querySelector('#op' + (i+1).toString()).querySelector('.voteQuantifier').style = 'width: ' + quant.toString() + '%';
+				style = 'width: ' + quant.toString() + '%';
+				
+
+				if ( i+1 == options[options.length - 1]) {
+					style += ';background-color: #00FF00';
+				}
+
+				elem.querySelector('#op' + (i+1).toString()).querySelector('.voteQuantifier').style = style;
+
 				}
 			});
+
+			if(options[options.length - 1] > 0) {
+				elem.parentNode.parentNode.querySelector('.card-header').style = 'background-color: #00FF00';
+			}	
+				
 		}
 	}
 </script>

@@ -1,5 +1,21 @@
 body {
-	background-color: #b3ffff;
+	display: flex;
+	flex-direction: row;
+	background: url("../imgs/mainBackground.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.pollsContainer {
+	width: 70%;
+	height: 100%;
+	padding: 10px;
+	overflow-y: scroll;
+
+	display: grid;
+	grid-template-columns: 20fr 20fr 20fr;
 }
 
 .pollOption {
@@ -17,4 +33,47 @@ body {
 	background-color: #99b3ff;
 	z-index: -1;
 	height: 100%;
+	width: 0%;
+	border-color: white;
+}
+
+.sideBar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: black;
+	height: 100%;
+	width: 30%;
+}
+
+.sideBar .mainInfo {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.sideBar .mainInfo label {
+	color: white;
+	font-family: BehindTS;
+	font-size: 50;
+	margin-bottom: 20px;
+}
+
+.sideBar .mainInfo img {
+	width: 200;
+	height: 200;
+}
+
+.sideBar .userOptions {
+	background-color: white;
+	width: 50%;
+
+	margin-top: 30px;
+}
+
+.sideBar .userOptions .userOption {
+	width: 100%;
+	padding: 10px;
+	border: 2mm ridge rgb(115, 115, 115);
+	cursor: pointer;
 }
