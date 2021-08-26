@@ -46,6 +46,13 @@ body {
 	width: 30%;
 }
 
+.sideBar .logout {
+	color: white;
+	align-self: flex-start;
+	font-size: 20px;
+	cursor: pointer;
+}
+
 .sideBar .mainInfo {
 	display: flex;
 	flex-direction: column;

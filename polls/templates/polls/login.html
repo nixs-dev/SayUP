@@ -14,13 +14,38 @@
 		<div class="mainContainer p-5">
 			<label class="mb-5">Login</label>
 
-			<form action="login/check" class="d-flex flex-column" method="post">
+			<form class="d-flex flex-column" method="post">
 				{% csrf_token %}
 				<input type="text" class="form-control mb-2" name="username">
 				<input type="password" class="form-control mb-3" name="password">
 
-				<button type="submit" class="btn lightButton align-self-end">Success</button>
+				<div class="error align-self-start">
+				</div>
+
+				<button type="button" class="btn lightButton align-self-end" onclick="login(this.parentNode)">Success</button>
 			</form>
+
 		</div>
 	</body>
+	<script type="text/javascript">
+		function login(form) {
+			formdata = new FormData(form);
+
+			$.ajax({
+				url: "login/check",
+				type: "POST",
+				data: formdata,
+			    processData: false,
+			    contentType: false,
+				success: function(result){
+			    	if(result[0]) {
+			    		window.location = '/';
+			    	}
+			    	else {
+			    		document.querySelector('.mainContainer').querySelector('form').querySelector('.error').innerHTML = result[1];
+			    	}
+			 	}
+			 });
+		}
+	</script>
 </html>

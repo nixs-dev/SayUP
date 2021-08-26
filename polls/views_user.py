@@ -11,7 +11,11 @@ import json
 def registerPage(request):
     template = loader.get_template('polls/register.html')
 
-    return HttpResponse(template.render(None, request))
+    context = {
+        'error': error
+    }
+
+    return HttpResponse(template.render(context, request))
 
 def register(request):
     username = request.POST['username']
@@ -35,13 +39,21 @@ def login(request):
     users = [u for u in User.objects.filter(username=username).values()]
 
     if users == []:
-        return HttpResponse('Usuário não encontrado')
+        return JsonResponse([False, 'Usuário não encontrado'], safe=False)
 
     user = users[0]
 
     if user['password'] == password:
 
         request.session['user'] = user
-        return redirect('/')
+        return JsonResponse([True, ''], safe=False)
     else:
-        return HttpResponse('Senha incorreta')
+        return JsonResponse([False, 'Senha incorreta'], safe=False)
+
+def logout(request):
+    try:
+        del request.session['user']
+    except:
+        pass
+    finally:
+        return redirect('auth/login')
