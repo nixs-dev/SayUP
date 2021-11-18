@@ -11,20 +11,17 @@ import json
 def registerPage(request):
     template = loader.get_template('polls/register.html')
 
-    context = {
-        'error': error
-    }
-
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render(None, request))
 
 def register(request):
     username = request.POST['username']
     password = request.POST['password']
+    gender = request.POST['gender']
 
-    user = User.objects.create(username=username, password=password)
+    user = User.objects.create(username=username, gender=gender, password=password)
     user.save()
 
-    return HttpResponse('OK')
+    return redirect('login')
 
 
 def loginPage(request):

@@ -10,24 +10,27 @@ import json
 def getData(user):
     questions = Question.objects.all()
     choices = Choice.objects.all()
-    calculatedChoices = {}
+    calculated_choices = {}
+
+    for question in questions:
+        calculated_choices[question.id] = [0, 0, 0, 0, 0, 0]  # Option 1,Option 2,Option 3,Option 4,Total Votes,Choice
 
     for i in choices:
-        if i.question.id not in calculatedChoices:
-            calculatedChoices[i.question.id] = [0, 0, 0, 0, 0, 0]
-
-        calculatedChoices[i.question.id][i.choice-1] += 1
-        calculatedChoices[i.question.id][len(calculatedChoices[i.question.id])-2] += 1
+        calculated_choices[i.question.id][i.choice-1] += 1
+        calculated_choices[i.question.id][-2] += 1
 
         if i.author_id == user['id']:
-            calculatedChoices[i.question.id][len(calculatedChoices[i.question.id])-1] = i.choice
+            calculated_choices[i.question.id][-1] = i.choice
 
-    for i in calculatedChoices:
-        a = calculatedChoices[i]
-        total = a[len(a)-2]
+    for question in calculated_choices:
+        options = calculated_choices[question]
+        total_votes = options[-2]
 
-        for j in range(0, len(a)-2):
-            a[j] = round((a[j]/total) * 100)
+        for j in range(0, len(options)-2):
+            if total_votes != 0:
+                options[j] = round((options[j]/total_votes) * 100)
+            else:
+                options[j] = 0
 
     list_questions = [i for i in questions.values()]
     list_choices = [i for i in choices.values()]
@@ -35,10 +38,11 @@ def getData(user):
     return {
         'questions': list_questions,
         'choices': list_choices,
-        'calculatedChoices': calculatedChoices
+        'calculatedChoices': calculated_choices
         }
 
-def getPolls(request):
+
+def get_polls(request):
     template = loader.get_template('polls/pollsList.html')
 
     data = getData(request.session['user'])
@@ -50,7 +54,8 @@ def getPolls(request):
 
     return template.render(context, request)
 
-def updatePolls(request):
+
+def update_polls(request):
     data = getData(request.session['user'])
 
     return JsonResponse(data)
@@ -59,27 +64,27 @@ def updatePolls(request):
 def index(request):
     template = loader.get_template('polls/index.html')
     
-    polls = getPolls(request)
+    polls = get_polls(request)
 
     context = {
         'user': request.session['user'],
         'polls': polls
     }
 
-
     return HttpResponse(template.render(context, request))
+
 
 def vote(request):
     author_id = int(request.session['user']['id'])
     poll = int(request.POST['poll'].replace('poll', ''))
-    vote = int(request.POST['vote'].replace('op', ''))
+    user_vote = int(request.POST['vote'].replace('op', ''))
     poll = Question.objects.filter(id=poll)
     author_id = User.objects.filter(id=author_id)
 
     votes = Choice.objects.filter(author_id=author_id[0], question=poll[0])
 
     if not votes.exists():
-        choice = Choice.objects.create(author=author_id[0], question=poll[0], choice=vote)
+        choice = Choice.objects.create(author=author_id[0], question=poll[0], choice=user_vote)
         choice.save()
     else:
         votes[0].delete()

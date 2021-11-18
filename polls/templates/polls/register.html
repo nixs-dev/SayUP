@@ -17,6 +17,13 @@
 			<form action="register/check" class="d-flex flex-column" method="post">
 				{% csrf_token %}
 				<input type="text" class="form-control mb-2" name="username">
+
+				<select name="gender">
+					<option value="Masculino">Masculino</option>
+					<option value="Feminino">Feminino</option>
+					<option value="Outro">Outro</option>
+				</select>
+
 				<input type="password" class="form-control mb-3" name="password">
 
 				<button type="submit" class="btn lightButton align-self-end">Success</button>

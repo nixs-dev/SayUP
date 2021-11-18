@@ -33,3 +33,7 @@ body {
 .mainContainer form .error {
 	color: #FF0000;
 }
+
+.mainContainer .create-account {
+    align-self: flex-end;
+}

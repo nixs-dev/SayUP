@@ -3,32 +3,44 @@
 		<div class="card-header" style="background-color: #80ffff;">
 			{{ i.question_text }}
 		</div>
-		<div class="card-body p-5">
+		<div class="card-body p-3">
 			<form id="poll{{ i.id }}">
 				{% csrf_token %}
 
 				<input type="hidden" id="poll" name="poll" value="poll{{ i.id }}">
 				<input type="hidden" id="optionSelected" name="vote">
 
-				<div class="pollOption border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode ,this)" id="op1">
-					{{ i.op1 }}
-					<div class="voteQuantifier border rounded">
+				<div class="optionInfo">
+					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode ,this)" id="op1">
+						{{ i.op1 }}
+						<div class="voteQuantifier border rounded">
+						</div>
 					</div>
+					<p class="votesPercentage">0%</p>
 				</div>
-				<div class="pollOption border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode ,this)" id="op2">
-					{{ i.op2 }}
-					<div class="voteQuantifier border rounded">
+				<div class="optionInfo">
+					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode ,this)" id="op2">
+						{{ i.op2 }}
+						<div class="voteQuantifier border rounded">
+						</div>
 					</div>
+					<p class="votesPercentage">0%</p>
 				</div>
-				<div class="pollOption border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode ,this)" id="op3">
-					{{ i.op3 }}
-					<div class="voteQuantifier border rounded">
+				<div class="optionInfo">
+					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode, this)" id="op3">
+						{{ i.op3 }}
+						<div class="voteQuantifier border rounded">
+						</div>
 					</div>
+					<p class="votesPercentage">0%</p>
 				</div>
-				<div class="pollOption border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode ,this)" id="op4">
-					{{ i.op4 }}
-					<div class="voteQuantifier border rounded">
+				<div class="optionInfo">
+					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode ,this)" id="op4">
+						{{ i.op4 }}
+						<div class="voteQuantifier border rounded">
+						</div>
 					</div>
+					<p class="votesPercentage">0%</p>
 				</div>
 			</form>
 		</div>
@@ -40,7 +52,6 @@
 	function updatePolls(choices) {
 
 		for (const [key, value] of Object.entries(choices)) {
-
 			elem = document.getElementById('poll' + key.toString())
 			options = value;
 
@@ -50,18 +61,21 @@
 				style = 'width: ' + quant.toString() + '%';
 				
 
-				if ( i+1 == options[options.length - 1]) {
+				if (i+1 == options[options.length - 1]) {
 					style += ';background-color: #00FF00';
 				}
 
 				elem.querySelector('#op' + (i+1).toString()).querySelector('.voteQuantifier').style = style;
-
+				elem.querySelector('#op' + (i+1).toString()).parentNode.querySelector('.votesPercentage').innerHTML = quant.toString() + '%';
 				}
 			});
 
 			if(options[options.length - 1] > 0) {
 				elem.parentNode.parentNode.querySelector('.card-header').style = 'background-color: #00FF00';
-			}	
+			}
+			else {
+				elem.parentNode.parentNode.querySelector('.card-header').style = 'background-color: #80FFFF';
+			}
 				
 		}
 	}
