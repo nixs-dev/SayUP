@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
             name='Choice',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('choice', models.IntegerField(max_length=1)),
+                ('choice', models.IntegerField()),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='polls.user')),
                 ('question', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='polls.question')),
             ],

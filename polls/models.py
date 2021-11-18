@@ -19,4 +19,4 @@ class Question(models.Model):
 class Choice(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice = models.IntegerField(max_length=1)
+    choice = models.IntegerField()
