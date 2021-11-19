@@ -25,10 +25,10 @@
 			</div>
 			<div class="userOptions">
 				<div class="userOption">
-					Perfil
+					<a href="my_profile">Perfil</a>
 				</div>
 				<div class="userOption">
-					<a data-bs-target="#addPollModal" data-toggle="modal" id="openAddPoll">Criar enquete</a>
+					<a data-bs-toggle="modal" data-bs-target="#addPollModal">Criar enquete</a>
 				</div>
 				<div class="userOption">
 					Amigos 
@@ -47,23 +47,75 @@
 			{{ polls }}
 		</div>
 	</body>
-	<div class="modal fade" id="addPollModal" role="dialog">
-		<div class="modal-dialog modal-lg">
+
+	<div class="modal" tabindex="-1" id="addPollModal">
+		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header bg-primary bg-gradient">
-					<h5 class="modal-title" id="exampleModalLabel">Adicionar ao carrinho</h5>
+				<div class="modal-header">
+					<h5 class="modal-title">Nova enquete</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
+					{% csrf_token %}
 
+					<div class="d-flex flex-row mb-5">
+						<label class="me-2">Pergunta:</label>
+						<input type="text" id="new_question">
+					</div>
+
+					<div class="d-flex flex-row mb-1">
+						<label class="me-2">Opção 1:</label>
+						<input type="text" id="new_question_op1">
+					</div>
+					<div class="d-flex flex-row mb-1">
+						<label class="me-2">Opção 2:</label>
+						<input type="text" id="new_question_op2">
+					</div>
+					<div class="d-flex flex-row mb-1">
+						<label class="me-2">Opção 3:</label>
+						<input type="text" id="new_question_op3">
+					</div>
+					<div class="d-flex flex-row mb-1">
+						<label class="me-2">Opção 4:</label>
+						<input type="text" id="new_question_op4">
+					</div>
 				</div>
-				<div class="modal-footer bg-primary bg-gradient">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="">Confirmar</button>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-primary" onclick="save_poll()">Salvar</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
+		function save_poll() {
+			form_data = new FormData();
+			form_data.append("csrfmiddlewaretoken", document.getElementsByName("csrfmiddlewaretoken")[0].value);
+			form_data.append("question", document.getElementById("new_question").value);
+			form_data.append("op1", document.getElementById("new_question_op1").value);
+			form_data.append("op2", document.getElementById("new_question_op2").value);
+			form_data.append("op3", document.getElementById("new_question_op3").value);
+			form_data.append("op4", document.getElementById("new_question_op4").value);
+
+
+			$.ajax({
+				url: "save_poll",
+				type: "POST",
+				data: form_data,
+				processData: false,
+				contentType: false,
+				success: function(result) {
+					if(result == "OK") {
+						alert("Enquete salva");
+						reload_all_polls();
+					}
+					else {
+						alert("Algo deu errado");
+					}
+				}
+			})
+		}
+
 		function sendVote(form, option) {
 			o = option.id
 			form.querySelector('#optionSelected').value = o
@@ -77,14 +129,7 @@
 			    processData: false,
 			    contentType: false,
 				success: function(result) {
-			    	$.ajax({
-						url: "polls",
-						type: "GET",
-						contentType: "json",
-						success: function(result){
-							updatePolls(result['calculatedChoices'])
-					 	}
-			 		});
+			    	reload_all_polls();
 			 	}
 			 });
 		}

@@ -7,6 +7,21 @@ from .models import Question
 import json
 
 
+def new_poll(request):
+    user_id = request.session['user']['id']
+    user = User.objects.filter(id=user_id)[0]
+
+    question = request.POST['question']
+    op1 = request.POST['op1']
+    op2 = request.POST['op2']
+    op3 = request.POST['op3']
+    op4 = request.POST['op4']
+
+    question = Question.objects.create(author=user, question_text=question, op1=op1, op2=op2, op3=op3, op4=op4)
+    question.save()
+
+    return HttpResponse('OK')
+
 def getData(user):
     questions = Question.objects.all()
     choices = Choice.objects.all()
@@ -56,9 +71,9 @@ def get_polls(request):
 
 
 def update_polls(request):
-    data = getData(request.session['user'])
+    data = get_polls(request)
 
-    return JsonResponse(data)
+    return HttpResponse(data)
 
 
 def index(request):

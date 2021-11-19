@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +53,7 @@ MIDDLEWARE = [
     'polls.middlewares.authentication.checkAuthenticated',
 ]
 
-ROOT_URLCONF = 'firstDjango.urls'
+ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'firstDjango.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database

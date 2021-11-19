@@ -1,3 +1,4 @@
+{% load filters %}
 {% for i in questions %}
 	<div class="card w-75 my-2">
 		<div class="card-header" style="background-color: #80ffff;">
@@ -13,70 +14,49 @@
 				<div class="optionInfo">
 					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode ,this)" id="op1">
 						{{ i.op1 }}
-						<div class="voteQuantifier border rounded">
+						<div class="voteQuantifier border rounded" style="width: {{ choices|dict_item:i.id|list_item:0 }}%">
 						</div>
 					</div>
-					<p class="votesPercentage">0%</p>
+					<p class="votesPercentage">{{ choices|dict_item:i.id|list_item:0 }}%</p>
 				</div>
 				<div class="optionInfo">
 					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode ,this)" id="op2">
 						{{ i.op2 }}
-						<div class="voteQuantifier border rounded">
+						<div class="voteQuantifier border rounded" style="width: {{ choices|dict_item:i.id|list_item:1 }}%">
 						</div>
 					</div>
-					<p class="votesPercentage">0%</p>
+					<p class="votesPercentage">{{ choices|dict_item:i.id|list_item:1 }}%</p>
 				</div>
 				<div class="optionInfo">
 					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode, this)" id="op3">
 						{{ i.op3 }}
-						<div class="voteQuantifier border rounded">
+						<div class="voteQuantifier border rounded" style="width: {{ choices|dict_item:i.id|list_item:2 }}%">
 						</div>
 					</div>
-					<p class="votesPercentage">0%</p>
+					<p class="votesPercentage">{{ choices|dict_item:i.id|list_item:2 }}%</p>
 				</div>
 				<div class="optionInfo">
 					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode ,this)" id="op4">
 						{{ i.op4 }}
-						<div class="voteQuantifier border rounded">
+						<div class="voteQuantifier border rounded" style="width: {{ choices|dict_item:i.id|list_item:3 }}%">
 						</div>
 					</div>
-					<p class="votesPercentage">0%</p>
+					<p class="votesPercentage">{{ choices|dict_item:i.id|list_item:3 }}%</p>
 				</div>
 			</form>
 		</div>
 	</div>
 {% endfor %}
 <script>
-	updatePolls({{ choices }});
-
-	function updatePolls(choices) {
-
-		for (const [key, value] of Object.entries(choices)) {
-			elem = document.getElementById('poll' + key.toString())
-			options = value;
-
-			options.forEach((quant, i) => {
-				if(i < options.length-2) {
-
-				style = 'width: ' + quant.toString() + '%';
-				
-
-				if (i+1 == options[options.length - 1]) {
-					style += ';background-color: #00FF00';
-				}
-
-				elem.querySelector('#op' + (i+1).toString()).querySelector('.voteQuantifier').style = style;
-				elem.querySelector('#op' + (i+1).toString()).parentNode.querySelector('.votesPercentage').innerHTML = quant.toString() + '%';
-				}
-			});
-
-			if(options[options.length - 1] > 0) {
-				elem.parentNode.parentNode.querySelector('.card-header').style = 'background-color: #00FF00';
+	function reload_all_polls() {
+		$.ajax({
+			url: "polls",
+			type: "GET",
+			processData: false,
+			contentType: false,
+			success: function(result){
+				document.querySelector('.pollsContainer').innerHTML = result;
 			}
-			else {
-				elem.parentNode.parentNode.querySelector('.card-header').style = 'background-color: #80FFFF';
-			}
-				
-		}
+		});
 	}
 </script>

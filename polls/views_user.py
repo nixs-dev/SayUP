@@ -7,6 +7,14 @@ from .models import Question
 from .models import User
 import json
 
+def my_profile(request):
+    template = loader.get_template('polls/profile.html')
+
+    context = {
+        'user': request.session['user']
+    }
+
+    return HttpResponse(template.render(context, request))
 
 def registerPage(request):
     template = loader.get_template('polls/register.html')
