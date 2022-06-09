@@ -10,7 +10,6 @@ class checkAuthenticated:
 		return response
 
 	def process_view(self, request, func, args, kwargs):
-
 		if request.path == '/':
 			try:
 				user = request.session['user']

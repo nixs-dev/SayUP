@@ -25,7 +25,6 @@ SESSION_ENGINE='django.contrib.sessions.backends.cache'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -81,8 +80,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django',
-        'USER': 'root',
-        'PASSWORD': 'santodeus123',
+        'USER': 'dev',
+        'PASSWORD': 'sandbox',
         'HOST': 'localhost'
     }
 }

@@ -7,6 +7,7 @@ from .models import Question
 from .models import User
 import json
 
+
 def my_profile(request):
     template = loader.get_template('polls/profile.html')
 
@@ -49,11 +50,26 @@ def login(request):
     user = users[0]
 
     if user['password'] == password:
-
         request.session['user'] = user
         return JsonResponse([True, ''], safe=False)
     else:
         return JsonResponse([False, 'Senha incorreta'], safe=False)
+        
+def update(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    photo = request.POST['photo']
+    
+    logged_user = request.session['user']
+    user = User.objects.get(id=logged_user['id'])
+    
+    user.username = username
+    user.password = password
+    user.save()
+    
+    request.session['user'] = User.objects.filter(id=logged_user['id']).values().first()
+    
+    return JsonResponse(True, safe=False)
 
 def logout(request):
     try:
