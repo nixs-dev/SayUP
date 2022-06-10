@@ -47,7 +47,12 @@ def getData(user):
             else:
                 options[j] = 0
 
-    list_questions = [i for i in questions.values()]
+    list_questions = []
+    for i in questions.values():
+        queryset_modified = i
+        
+        queryset_modified['author_username'] = User.objects.get(id=queryset_modified['author_id']).username
+        list_questions.append(queryset_modified)
     list_choices = [i for i in choices.values()]
     
     return {
@@ -59,14 +64,14 @@ def getData(user):
 
 def get_polls(request):
     template = loader.get_template('polls/pollsList.html')
-
     data = getData(request.session['user'])
 
     context = {
         'questions': data['questions'],
         'choices': data['calculatedChoices']
     }
-
+    
+    print(context['questions'])
     return template.render(context, request)
 
 
