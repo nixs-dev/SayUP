@@ -71,7 +71,6 @@ def get_polls(request):
         'choices': data['calculatedChoices']
     }
     
-    print(context['questions'])
     return template.render(context, request)
 
 
@@ -110,3 +109,8 @@ def vote(request):
         votes[0].delete()
     
     return HttpResponse('OK')
+
+def error_404(request, exception):
+    template = loader.get_template('polls/errors/404.html')
+    
+    return HttpResponse(template.render(None, request))

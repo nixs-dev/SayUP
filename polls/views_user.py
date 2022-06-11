@@ -8,14 +8,30 @@ from .models import User
 import json
 
 
-def my_profile(request):
+def get_profile(request, username):
     template = loader.get_template('polls/profile.html')
-
-    context = {
-        'user': request.session['user']
+    user = User.objects.filter(username=username).values().first()
+    
+    general_context = {
     }
-
-    return HttpResponse(template.render(context, request))
+    user_context = {
+        'user': user
+    }
+    is_logged = False
+    
+    if 'user' not in request.session.keys():
+        is_logged = False
+    else:
+        is_logged = request.session['user']['id'] == user['id']
+    
+    if is_logged:
+        user_info_template = loader.get_template('polls/logged_user_info.html')
+        general_context['user_info_template'] = user_info_template.render(user_context, request)
+    else:
+        user_info_template = loader.get_template('polls/non_logged_user_info.html')
+        general_context['user_info_template'] = user_info_template.render(user_context, request)
+        
+    return HttpResponse(template.render(general_context, request))
 
 def registerPage(request):
     template = loader.get_template('polls/register.html')

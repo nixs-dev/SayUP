@@ -12,19 +12,6 @@
 		<link href="{% static 'styles/profile.css' %}" rel="stylesheet">
     </head>
     <body>
-        {% if user.gender == 'Masculino' %}
-			<img src="{% static 'imgs/defaultMaleIcon.png' %}">
-		{% elif user.gender == 'Feminino' %}
-			<img src="{% static 'imgs/defaultFemaleIcon.png' %}">
-		{% endif %}
-		
-		<form method="POST" action="auth/profile/update" class="d-flex flex-column">
-		    {% csrf_token %}
-    		<input type="file" name="photo" class="form-control invisible">
-            <input type="text" name="username" value="{{ user.username }}" class="form-control">
-            <input type="password" name="password" value="{{ user.password }}" class="form-control">
-        
-            <button type="submit" class="btn btn-outline-secondary">Salvar</button>
-        </form>
+        {{ user_info_template }}
     </body>
 </html>

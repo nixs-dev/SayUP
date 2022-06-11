@@ -12,7 +12,6 @@
 		<link href="{% static 'styles/polls.css' %}" rel="stylesheet">
 	</head>
 	<body>
-
 		<div class="sidebar">
 			<a href="logout" class="logout"><i class="fas fa-sign-out-alt"></i></a>
 			<div class="mainInfo">
@@ -25,7 +24,7 @@
 			</div>
 			<div class="userOptions">
 				<div class="userOption">
-					<a href="my_profile">Perfil</a>
+					<a href="profiles/{{ user.username }}">Perfil</a>
 				</div>
 				<div class="userOption">
 					<a data-bs-toggle="modal" data-bs-target="#addPollModal">Criar enquete</a>
@@ -41,8 +40,6 @@
 				</div>
 			</div>
 		</div>
-
-
 		<div class="pollsContainer">
 			{{ polls }}
 		</div>

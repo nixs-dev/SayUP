@@ -1,0 +1,12 @@
+{% load static %}
+
+{% if user.gender == 'Masculino' %}
+    <img src="{% static 'imgs/defaultMaleIcon.png' %}">
+{% elif user.gender == 'Feminino' %}
+    <img src="{% static 'imgs/defaultFemaleIcon.png' %}">
+{% endif %}
+
+<div class="d-flex flex-column">
+    <label>{{ user.username }}</label>
+    <label>Sexo {{ user.gender }}</label>
+</form>
