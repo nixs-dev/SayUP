@@ -39,15 +39,24 @@ def registerPage(request):
     return HttpResponse(template.render(None, request))
 
 def register(request):
+    photo = None
+    photo_data = None
+    
+    if len(request.FILES) > 0:
+        photo = request.FILES['photo']
+        photo_data = photo.read()
+    else:
+        photo = None
+        photo_data = None
+        
     username = request.POST['username']
     password = request.POST['password']
     gender = request.POST['gender']
 
-    user = User.objects.create(username=username, gender=gender, password=password)
+    user = User.objects.create(photo=photo_data, username=username, gender=gender, password=password)
     user.save()
 
     return redirect('login')
-
 
 def loginPage(request):
     template = loader.get_template('polls/login.html')

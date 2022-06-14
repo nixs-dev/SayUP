@@ -1,9 +1,14 @@
 {% load static %}
+{℅ load filters %}
 
-{% if user.gender == 'Masculino' %}
-    <img src="{% static 'imgs/defaultMaleIcon.png' %}">
-{% elif user.gender == 'Feminino' %}
-    <img src="{% static 'imgs/defaultFemaleIcon.png' %}">
+{% if user.photo is None %}
+	{% if user.gender == 'Masculino' %}
+		<img src="{% static 'imgs/defaultMaleIcon.png' %}">
+	{% elif user.gender == 'Feminino' %}
+		<img src="{% static 'imgs/defaultFemaleIcon.png' %}">
+	{% endif %}
+{% else %}
+    <img src="data:image;base64,{{ user.photo|binary_to_b64 }}">
 {% endif %}
 
 <div class="d-flex flex-column">

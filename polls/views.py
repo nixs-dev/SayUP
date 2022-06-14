@@ -4,20 +4,22 @@ from django.template import loader
 from .models import User
 from .models import Choice
 from .models import Question
+from .models import Category
 import json
 
 
 def new_poll(request):
     user_id = request.session['user']['id']
     user = User.objects.filter(id=user_id)[0]
-
+    category = Category.objects.filter(id=request.POST['category'])[0]
+    
     question = request.POST['question']
     op1 = request.POST['op1']
     op2 = request.POST['op2']
     op3 = request.POST['op3']
     op4 = request.POST['op4']
 
-    question = Question.objects.create(author=user, question_text=question, op1=op1, op2=op2, op3=op3, op4=op4)
+    question = Question.objects.create(author=user, category=category, question_text=question, op1=op1, op2=op2, op3=op3, op4=op4)
     question.save()
 
     return HttpResponse('OK')
@@ -73,7 +75,26 @@ def get_polls(request):
     
     return template.render(context, request)
 
+def get_categories(request):
+    categories = Category.objects.all()
+    template = loader.get_template('polls/categoriesList.html')
+    
+    context = {
+        'categories': categories
+    }
+    
+    return template.render(context, request)
 
+def get_add_poll_modal(request):
+    categories = Category.objects.all()
+    template = loader.get_template('polls/add_poll_modal.html')
+    
+    context = {
+        'categories': categories
+    }
+    
+    return template.render(context, request)
+    
 def update_polls(request):
     data = get_polls(request)
 
@@ -84,10 +105,14 @@ def index(request):
     template = loader.get_template('polls/index.html')
     
     polls = get_polls(request)
-
+    categories = get_categories(request)
+    add_poll_modal = get_add_poll_modal(request)
+    
     context = {
         'user': request.session['user'],
-        'polls': polls
+        'polls': polls,
+        'categories': categories,
+        'add_poll_modal': add_poll_modal
     }
 
     return HttpResponse(template.render(context, request))

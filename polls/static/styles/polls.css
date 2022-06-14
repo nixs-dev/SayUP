@@ -8,17 +8,6 @@ body {
     background-size: cover;
 }
 
-.pollsContainer {
-	width: 70%;
-	height: 100%;
-	padding: 10px;
-	overflow-y: scroll;
-
-	display: grid;
-	grid-template-columns: 20fr 20fr 20fr;
-	grid-auto-rows: min-content;
-}
-
 .optionInfo {
     display: flex;
     flex-direction: row;
@@ -94,4 +83,40 @@ body {
 
 .sideBar .userOptions .userOption:hover {
 	color: blueviolet;
+}
+
+.pollsContent {
+    width: 70%;
+    height: 100%;
+}
+
+.categoriesContainer {
+    width: 100%;
+    height: 20%;
+    background-color: white;
+}
+
+.categoriesContainer table {
+    width: 100%;
+}
+
+.pollsContainer {
+	width: 100%;
+	height: 80%;
+	padding: 10px;
+	overflow-y: scroll;
+
+	display: grid;
+	grid-template-columns: 20fr 20fr 20fr;
+	grid-auto-rows: min-content;
+}
+
+.categoryContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid blue;
+    border-radius: 5%;
+    background-color: white;
 }

@@ -20,7 +20,6 @@ class Command(BaseCommand, ABC):
             'username': 'Felipe',
             'password': '123'
         }
-
     ]
 
     def handle(self, *args, **kwargs):
