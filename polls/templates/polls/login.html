@@ -9,6 +9,7 @@
 		<link href="{% static 'styles/fonts.css' %}" rel="stylesheet">
 		<link href="{% static 'styles/buttons.css' %}" rel="stylesheet">
 		<link href="{% static 'styles/auth.css' %}" rel="stylesheet">
+        <script src="{% static 'js/user.js' %}"></script>
 	</head>
 	<body>
 		<div class="mainContainer p-5">
@@ -22,31 +23,10 @@
 				<div class="error align-self-start">
 				</div>
 
-				<button type="button" class="btn lightButton align-self-end" onclick="login(this.parentNode)">Success</button>
+				<button type="button" class="lightButton align-self-end" onclick="login(this.parentNode)">Success</button>
 			</form>
 
 			<a href="register" class="create-account">Não tenho uma conta</a>
 		</div>
 	</body>
-	<script type="text/javascript">
-		function login(form) {
-			formdata = new FormData(form);
-
-			$.ajax({
-				url: "login/check",
-				type: "POST",
-				data: formdata,
-			    processData: false,
-			    contentType: false,
-				success: function(result){
-			    	if(result[0]) {
-			    		window.location = '/';
-			    	}
-			    	else {
-			    		document.querySelector('.mainContainer').querySelector('form').querySelector('.error').innerHTML = result[1];
-			    	}
-			 	}
-			 });
-		}
-	</script>
 </html>

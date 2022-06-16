@@ -1,4 +1,5 @@
 {% load filters %}
+
 {% for i in questions %}
 	<div class="card w-75 my-2">
 		<div class="card-header" style="background-color: #80ffff;">
@@ -46,20 +47,7 @@
 			</form>
 		</div>
         <div class="card-footer text-muted">
-            Postado por {{ i.author_username }}
+            Postado por <a href="profiles/{{ i.author_username }}">{{ i.author_username }}</a>
         </div>
 	</div>
 {% endfor %}
-<script>
-	function reload_all_polls() {
-		$.ajax({
-			url: "polls",
-			type: "GET",
-			processData: false,
-			contentType: false,
-			success: function(result){
-				document.querySelector('.pollsContainer').innerHTML = result;
-			}
-		});
-	}
-</script>

@@ -91,13 +91,24 @@ body {
 }
 
 .categoriesContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 20%;
     background-color: white;
+    border-radius: 7%;
+    padding: 10px 10px 10px 10px;
 }
 
 .categoriesContainer table {
     width: 100%;
+}
+
+.categoriesContainer button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .pollsContainer {

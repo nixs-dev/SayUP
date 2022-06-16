@@ -24,8 +24,8 @@ def new_poll(request):
 
     return HttpResponse('OK')
 
-def getData(user):
-    questions = Question.objects.all()
+def getData(user, category):
+    questions = Question.objects.all() if category is None else Question.objects.filter(category_id=category)
     choices = Choice.objects.all()
     calculated_choices = {}
 
@@ -66,8 +66,9 @@ def getData(user):
 
 def get_polls(request):
     template = loader.get_template('polls/pollsList.html')
-    data = getData(request.session['user'])
-
+    category = request.GET['category'] if 'category' in request.GET.keys() else None
+    data = getData(request.session['user'], category)
+    
     context = {
         'questions': data['questions'],
         'choices': data['calculatedChoices']
