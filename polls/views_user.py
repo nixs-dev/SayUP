@@ -81,13 +81,23 @@ def login(request):
         return JsonResponse([False, 'Senha incorreta'], safe=False)
         
 def update(request):
+    photo = None
+    photo_data = None
+    
+    if len(request.FILES) > 0:
+        photo = request.FILES['photo']
+        photo_data = photo.read()
+    else:
+        photo = None
+        photo_data = None
+        
     username = request.POST['username']
     password = request.POST['password']
-    photo = request.POST['photo']
     
     logged_user = request.session['user']
     user = User.objects.get(id=logged_user['id'])
     
+    user.photo = photo_data
     user.username = username
     user.password = password
     user.save()
