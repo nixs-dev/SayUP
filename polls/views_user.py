@@ -5,24 +5,45 @@ from django.shortcuts import redirect
 from .models import Choice
 from .models import Question
 from .models import User
+from .models import FriendRequest
 import json
 
 
 def get_profile(request, username):
     template = loader.get_template('polls/profile.html')
-    user = User.objects.filter(username=username).values().first()
+    user = User.objects.get(username=username)
     
     general_context = {
     }
     user_context = {
         'user': user
     }
+    
+    someone_is_logged = False
     is_logged = False
+    is_friend = False
     
     if 'user' not in request.session.keys():
         is_logged = False
+        someone_is_logged = False
     else:
-        is_logged = request.session['user']['id'] == user['id']
+        someone_is_logged = True
+        
+        if request.session['user']['id'] == user.id:
+            is_logged = True
+        else:
+            is_logged = False
+    
+    if someone_is_logged:
+        friendrequest = FriendRequest.objects.filter(sender=User.objects.get(id=request.session['user']['id']), recipient=user).values().first()
+        
+        if friendrequest is not None:
+            friendrequest = friendrequest['accepted']
+        is_friend = friendrequest
+    
+    user_context['someone_is_logged'] = someone_is_logged
+    user_context['is_logged'] = is_logged
+    user_context['is_friend'] = is_friend
     
     if is_logged:
         user_info_template = loader.get_template('polls/logged_user_info.html')

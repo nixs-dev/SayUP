@@ -21,6 +21,12 @@ body {
 	padding: 3% 3% 3% 3%;
 }
 
+.mainContainer #friendRequestButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .mainContainer img {
     width: 70%;
     height: 30%;

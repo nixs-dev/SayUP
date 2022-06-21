@@ -1,6 +1,18 @@
 {% load static %}
 {% load filters %}
 
+{% if someone_is_logged %}
+    {% if is_friend is not None %}
+        {% if is_friend %}
+            <button id="friendRequestButton" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-users"></i></button>
+        {% else %}
+            <button id="friendRequestButton" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-user-clock"></i></button>
+        {% endif %}
+    {% else %}
+        <button id="friendRequestButton" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-paper-plane"></i></button>
+    {% endif %}
+{% endif %}
+
 {% if user.photo is None %}
 	{% if user.gender == 'Masculino' %}
 		<img src="{% static 'imgs/defaultMaleIcon.png' %}">

@@ -5,6 +5,7 @@ from .models import User
 from .models import Choice
 from .models import Question
 from .models import Category
+from . import views_friendrequest
 import json
 
 
@@ -108,12 +109,14 @@ def index(request):
     polls = get_polls(request)
     categories = get_categories(request)
     add_poll_modal = get_add_poll_modal(request)
+    friend_requests_modal = views_friendrequest.get_friendrequests(request)
     
     context = {
         'user': request.session['user'],
         'polls': polls,
         'categories': categories,
-        'add_poll_modal': add_poll_modal
+        'add_poll_modal': add_poll_modal,
+        'friend_requests_modal': friend_requests_modal
     }
 
     return HttpResponse(template.render(context, request))

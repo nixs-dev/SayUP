@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from . import views_user
+from . import views_friendrequest
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -8,6 +10,7 @@ urlpatterns = [
     path('save_poll', views.new_poll, name='save_poll'),
     path('polls', views.update_polls, name='polls'),
     path('profiles/<str:username>', views_user.get_profile, name='user_profile'),
+    path('profiles/actions/sendfriendrequest', views_friendrequest.send, name='send_friendrequest'),
     path('auth/login', views_user.loginPage, name='login'),
     path('auth/register', views_user.registerPage, name='register'),
     path('auth/login/check', views_user.login, name='loginCheck'),

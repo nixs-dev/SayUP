@@ -27,3 +27,8 @@ class Choice(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice = models.IntegerField()
+
+class FriendRequest(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_sender_id')
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_recipient_id')
+    accepted = models.BooleanField(default=False)
