@@ -11,6 +11,7 @@ urlpatterns = [
     path('polls', views.update_polls, name='polls'),
     path('profiles/<str:username>', views_user.get_profile, name='user_profile'),
     path('profiles/actions/sendfriendrequest', views_friendrequest.send, name='send_friendrequest'),
+    path('profiles/actions/acceptfriendrequest', views_friendrequest.accept, name='accept_friendrequest'),
     path('auth/login', views_user.loginPage, name='login'),
     path('auth/register', views_user.registerPage, name='register'),
     path('auth/login/check', views_user.login, name='loginCheck'),

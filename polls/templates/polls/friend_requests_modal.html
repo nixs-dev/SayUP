@@ -15,14 +15,25 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="received" role="tabpanel" aria-labelledby="received-tab">
+                    <div class="tab-pane fade show active d-flex flex-column" id="received" role="tabpanel" aria-labelledby="received-tab">
                         {% for r in requests_received %}
-                            <label>{{ r.sender_username }}</label>
+                            <div class="friend-request">
+                                <label>{{ r.sender_username }}</label>
+                                <div class="friend-request-options">
+                                    <button onclick="accept_friendrequest(this, {{ r.id }}, true)"><i class="fas fa-check-circle"></i></button>
+                                    <button onclick="accept_friendrequest(this, {{ r.id }}, false)"><i class="fas fa-ban"></i></button>
+                                </div>
+                            </div>
                         {% endfor %}
                     </div>
-                    <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab">
+                    <div class="tab-pane fade d-flex flex-column" id="sent" role="tabpanel" aria-labelledby="sent-tab">
                         {% for r in requests_sent %}
-                            <label>{{ r.recipient_username }}</label>
+                            <div class="friend-request">
+                                <label>{{ r.recipient_username }}</label>
+                                <div class="friend-request-options">
+                                    <button onclick="accept_friendrequest(this, {{ r.id }}, false)"><i class="fas fa-ban"></i></button>
+                                </div>
+                            </div>
                         {% endfor %}
                     </div>
                 </div>

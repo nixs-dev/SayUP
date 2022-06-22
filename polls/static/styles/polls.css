@@ -132,3 +132,15 @@ body {
     border-radius: 5%;
     background-color: white;
 }
+
+.friend-request {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 1px solid black;
+}
+
+.friend-request .friend-request-options {
+    display: flex;
+    flex-direction: row;
+}

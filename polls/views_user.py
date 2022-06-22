@@ -37,6 +37,9 @@ def get_profile(request, username):
     if someone_is_logged:
         friendrequest = FriendRequest.objects.filter(sender=User.objects.get(id=request.session['user']['id']), recipient=user).values().first()
         
+        if friendrequest is None:
+            friendrequest = FriendRequest.objects.filter(sender=user, recipient=User.objects.get(id=request.session['user']['id'])).values().first()
+        
         if friendrequest is not None:
             friendrequest = friendrequest['accepted']
         is_friend = friendrequest
