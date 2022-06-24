@@ -14,3 +14,15 @@ def list_item(list_, index):
 @register.filter(name='binary_to_b64')
 def binary_to_b64(binary):
     return b64encode(binary).decode('utf-8')
+
+@register.filter(name='range_list')
+def range_list(start, end):
+    return range(start, end)
+
+@register.filter(name='get_attribute')
+def get_attribute(obj, var):
+    return getattr(obj, var)
+
+@register.filter(name='to_str')
+def to_str(integer):
+    return str(integer)

@@ -28,17 +28,21 @@ def send(request):
     user_id = request.POST['user_id']
     sender = User.objects.get(id=request.session['user']['id'])
     recipient = User.objects.get(id=user_id)
+    status = ""
     
     friend_request_status = FriendRequest.objects.filter(sender=sender, recipient=recipient).values().first()
     friend_request_status = friend_request_status['accepted'] if friend_request_status is not None else None
     
     if friend_request_status is None:
         FriendRequest(sender=sender, recipient=recipient).save()
+        status = "SENT"
     else:
         fr = FriendRequest.objects.get(sender=sender, recipient=recipient)
         fr.delete()
+        
+        status = "SEND"
     
-    return JsonResponse(True, safe=False)
+    return JsonResponse(status, safe=False)
 
 def accept(request):
     fr_id = request.POST['fr_id']

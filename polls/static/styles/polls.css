@@ -33,6 +33,10 @@ body {
 	border-color: white;
 }
 
+.bar-representation .votesPercentage {
+    width: 20%;
+}
+
 .sideBar {
 	display: flex;
 	flex-direction: column;

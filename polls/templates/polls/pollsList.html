@@ -11,39 +11,25 @@
 
 				<input type="hidden" id="poll" name="poll" value="poll{{ i.id }}">
 				<input type="hidden" id="optionSelected" name="vote">
-
-				<div class="optionInfo">
-					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode ,this)" id="op1">
-						{{ i.op1 }}
-						<div class="voteQuantifier border rounded" style="width: {{ choices|dict_item:i.id|list_item:0 }}%">
-						</div>
-					</div>
-					<p class="votesPercentage">{{ choices|dict_item:i.id|list_item:0 }}%</p>
-				</div>
-				<div class="optionInfo">
-					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode ,this)" id="op2">
-						{{ i.op2 }}
-						<div class="voteQuantifier border rounded" style="width: {{ choices|dict_item:i.id|list_item:1 }}%">
-						</div>
-					</div>
-					<p class="votesPercentage">{{ choices|dict_item:i.id|list_item:1 }}%</p>
-				</div>
-				<div class="optionInfo">
-					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode, this)" id="op3">
-						{{ i.op3 }}
-						<div class="voteQuantifier border rounded" style="width: {{ choices|dict_item:i.id|list_item:2 }}%">
-						</div>
-					</div>
-					<p class="votesPercentage">{{ choices|dict_item:i.id|list_item:2 }}%</p>
-				</div>
-				<div class="optionInfo">
-					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode ,this)" id="op4">
-						{{ i.op4 }}
-						<div class="voteQuantifier border rounded" style="width: {{ choices|dict_item:i.id|list_item:3 }}%">
-						</div>
-					</div>
-					<p class="votesPercentage">{{ choices|dict_item:i.id|list_item:3 }}%</p>
-				</div>
+                
+                {% for op_num in 1|range_list:5 %}
+    				<div class="optionInfo">
+    				    {% with op_num_offset=op_num|add:'-1' %}
+        					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode, this)" id="op{{ op_num }}">
+        					    {% with op_num_str=op_num|to_str %}
+        					        {% with op_num_index='op'|add:op_num_str %}
+        					            {{ i|dict_item:op_num_index }}
+        					        {% endwith %}
+        					    {% endwith %}
+        						<div class="voteQuantifier border rounded" style="width: {{ choices|dict_item:i.id|list_item:op_num_offset}}%">
+        						</div>
+        					</div>
+        					<div class="votesPercentage">
+        					    {{ choices|dict_item:i.id|list_item:op_num_offset }}%
+        					</div>
+        			    {% endwith %}
+    				</div>
+    	        {% endfor %}
 			</form>
 		</div>
         <div class="card-footer text-muted">

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.template import loader
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from .models import Choice
 from .models import Question
 from .models import User
@@ -11,7 +11,7 @@ import json
 
 def get_profile(request, username):
     template = loader.get_template('polls/profile.html')
-    user = User.objects.get(username=username)
+    user = get_object_or_404(User, username=username)
     
     general_context = {
     }
