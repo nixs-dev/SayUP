@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 
 class checkAuthenticated:
     MUST_NOT = ['/auth/login/', '/auth/login/check/', '/auth/register/', '/auth/register/check/'] # must not be authenticated
-    NOT_MATTER = ['/profiles/'] # be authenticated or not doesnt matter
+    NOT_MATTER = ['/profiles/', '/api/'] # be authenticated or not doesnt matter
     
     def __init__(self, get_reponse=None):
         self.get_reponse = get_reponse
@@ -34,5 +34,5 @@ class checkAuthenticated:
                 return None
             else:
                 return redirect('/auth/login')
-        
+                
         return None
