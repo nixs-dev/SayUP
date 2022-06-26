@@ -36,15 +36,15 @@ function save_poll() {
 				alert("Algo deu errado");
 			}
 		}
-	})
+	});
 }
 
 function sendVote(form, option) {
-	o = option.id
-	form.querySelector('#optionSelected').value = o
-
+    alert('oi');
+	o = option.id;
+	form.querySelector('#optionSelected').value = o;
 	formdata = new FormData(form);
-
+    alert('oi');
 	$.ajax({
 		url: "vote",
 		type: "POST",

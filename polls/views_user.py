@@ -21,7 +21,8 @@ def get_profile(request, username):
     
     someone_is_logged = False
     is_logged = False
-    is_friend = False
+    pendent_friend_request = None
+    is_friend = None
     
     if 'user' not in request.session.keys():
         is_logged = False
@@ -35,17 +36,23 @@ def get_profile(request, username):
             is_logged = False
     
     if someone_is_logged:
-        friendrequest = FriendRequest.objects.filter(sender=User.objects.get(id=request.session['user']['id']), recipient=user).values().first()
+        friendrequest_from_this = FriendRequest.objects.filter(sender=User.objects.get(id=request.session['user']['id']), recipient=user).first()
+        friendrequest_from_another = FriendRequest.objects.filter(sender=user, recipient=User.objects.get(id=request.session['user']['id'])).first()
         
-        if friendrequest is None:
-            friendrequest = FriendRequest.objects.filter(sender=user, recipient=User.objects.get(id=request.session['user']['id'])).values().first()
-        
-        if friendrequest is not None:
-            friendrequest = friendrequest['accepted']
-        is_friend = friendrequest
+        if friendrequest_from_this is not None:
+            is_friend = friendrequest_from_this.accepted
+        elif friendrequest_from_another is not None:
+            pendent_friend_request = friendrequest_from_another if not friendrequest_from_another.accepted else None
+            
+            if pendent_friend_request is None:
+                is_friend = True
+        else:
+            is_friend = None
+            pendent_friend_request = None
     
     user_context['someone_is_logged'] = someone_is_logged
     user_context['is_logged'] = is_logged
+    user_context['pendent_friend_request'] = pendent_friend_request
     user_context['is_friend'] = is_friend
     
     if is_logged:

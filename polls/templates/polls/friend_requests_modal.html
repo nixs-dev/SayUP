@@ -18,10 +18,10 @@
                     <div class="tab-pane fade show active d-flex flex-column" id="received" role="tabpanel" aria-labelledby="received-tab">
                         {% for r in requests_received %}
                             <div class="friend-request" id="friend-request-{{ r.id }}">
-                                <label>{{ r.sender_username }}</label>
+                                <label>{{ r.sender.username }}</label>
                                 <div class="friend-request-options">
-                                    <button onclick="accept_friendrequest({{ r.id }}, true)"><i class="fas fa-check-circle"></i></button>
-                                    <button onclick="accept_friendrequest({{ r.id }}, false)"><i class="fas fa-ban"></i></button>
+                                    <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ r.id }}, true)"><i class="fas fa-check-circle"></i></button>
+                                    <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ r.id }}, false)"><i class="fas fa-ban"></i></button>
                                 </div>
                             </div>
                         {% endfor %}
@@ -29,9 +29,9 @@
                     <div class="tab-pane fade d-flex flex-column" id="sent" role="tabpanel" aria-labelledby="sent-tab">
                         {% for r in requests_sent %}
                             <div class="friend-request" id="friend-request-{{ r.id }}">
-                                <label>{{ r.recipient_username }}</label>
+                                <label>{{ r.recipient.username }}</label>
                                 <div class="friend-request-options">
-                                    <button onclick="accept_friendrequest({{ r.id }}, false)"><i class="fas fa-ban"></i></button>
+                                    <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ r.id }}, false)"><i class="fas fa-ban"></i></button>
                                 </div>
                             </div>
                         {% endfor %}

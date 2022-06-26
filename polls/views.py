@@ -11,8 +11,8 @@ import json
 
 def new_poll(request):
     user_id = request.session['user']['id']
-    user = User.objects.filter(id=user_id)[0]
-    category = Category.objects.filter(id=request.POST['category'])[0]
+    user = User.objects.filter(id=user_id).first()
+    category = Category.objects.filter(id=request.POST['category']).first()
     
     question = request.POST['question']
     op1 = request.POST['op1']
@@ -25,7 +25,7 @@ def new_poll(request):
 
     return HttpResponse('OK')
 
-def getData(user, category):
+def get_data(user, category):
     questions = Question.objects.all() if category is None else Question.objects.filter(category_id=category)
     choices = Choice.objects.all()
     calculated_choices = {}
@@ -50,25 +50,17 @@ def getData(user, category):
             else:
                 options[j] = 0
 
-    list_questions = []
-    for i in questions.values():
-        queryset_modified = i
-        
-        queryset_modified['author_username'] = User.objects.get(id=queryset_modified['author_id']).username
-        list_questions.append(queryset_modified)
-    list_choices = [i for i in choices.values()]
-    
     return {
-        'questions': list_questions,
-        'choices': list_choices,
+        'questions': questions,
+        'choices': choices,
         'calculatedChoices': calculated_choices
-        }
+    }
 
 
 def get_polls(request):
     template = loader.get_template('polls/pollsList.html')
     category = request.GET['category'] if 'category' in request.GET.keys() else None
-    data = getData(request.session['user'], category)
+    data = get_data(request.session['user'], category)
     
     context = {
         'questions': data['questions'],
@@ -126,13 +118,13 @@ def vote(request):
     author_id = int(request.session['user']['id'])
     poll = int(request.POST['poll'].replace('poll', ''))
     user_vote = int(request.POST['vote'].replace('op', ''))
-    poll = Question.objects.filter(id=poll)
-    author_id = User.objects.filter(id=author_id)
+    poll = Question.objects.get(id=poll)
+    author = User.objects.get(id=author_id)
 
-    votes = Choice.objects.filter(author_id=author_id[0], question=poll[0])
+    votes = Choice.objects.filter(author_id=author, question=poll)
 
     if not votes.exists():
-        choice = Choice.objects.create(author=author_id[0], question=poll[0], choice=user_vote)
+        choice = Choice.objects.create(author=author, question=poll, choice=user_vote)
         choice.save()
     else:
         votes[0].delete()

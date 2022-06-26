@@ -9,13 +9,8 @@ import json
 def get_friendrequests(request):
     template = loader.get_template('polls/friend_requests_modal.html')
     
-    requests_sent = FriendRequest.objects.filter(sender_id=request.session['user']['id'], accepted=False).values()
-    for r in requests_sent:
-        r['recipient_username'] = User.objects.get(id=r['recipient_id']).username 
-    
-    requests_received = FriendRequest.objects.filter(recipient_id=request.session['user']['id'], accepted=False).values()
-    for r in requests_received:
-        r['sender_username'] = User.objects.get(id=r['sender_id']).username 
+    requests_sent = FriendRequest.objects.filter(sender_id=request.session['user']['id'], accepted=False)
+    requests_received = FriendRequest.objects.filter(recipient_id=request.session['user']['id'], accepted=False)
  
     context = {
         'requests_sent': requests_sent,
@@ -30,16 +25,22 @@ def send(request):
     recipient = User.objects.get(id=user_id)
     status = ""
     
-    friend_request_status = FriendRequest.objects.filter(sender=sender, recipient=recipient).values().first()
-    friend_request_status = friend_request_status['accepted'] if friend_request_status is not None else None
+    friend_request_status_1 = FriendRequest.objects.filter(sender=sender, recipient=recipient).first()
+    friend_request_status_2 = FriendRequest.objects.filter(sender=recipient, recipient=sender).first()
+    matched_fr = None
     
-    if friend_request_status is None:
+    if friend_request_status_1 is not None:
+        matched_fr = friend_request_status_1
+    elif friend_request_status_2 is not None:
+        matched_fr = friend_request_status_2
+    else:
+        matched_fr = None
+    
+    if matched_fr is None:
         FriendRequest(sender=sender, recipient=recipient).save()
         status = "SENT"
     else:
-        fr = FriendRequest.objects.get(sender=sender, recipient=recipient)
-        fr.delete()
-        
+        matched_fr.delete()
         status = "SEND"
     
     return JsonResponse(status, safe=False)

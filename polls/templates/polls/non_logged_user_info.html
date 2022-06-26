@@ -2,14 +2,25 @@
 {% load filters %}
 
 {% if someone_is_logged %}
-    {% if is_friend is not None %}
-        {% if is_friend %}
-            <button id="friendRequestButton" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-users"></i></button>
-        {% else %}
-            <button id="friendRequestButton" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-user-clock"></i></button>
-        {% endif %}
+    {% if pendent_friend_request %}
+        <div id="pendentFriendRequest">
+            <p>Você possui uma requisição de amizade pendente de {{ pendent_friend_request.sender.username }}
+            </p>
+            <div class="d-flex flex-row">
+                <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ pendent_friend_request.id }}, true)"><i class="fas fa-check-circle"></i></button>
+                <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ pendent_friend_request.id }}, false)"><i class="fas fa-ban"></i></button>
+            </div>
+        </div>
     {% else %}
-        <button id="friendRequestButton" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-paper-plane"></i></button>
+        {% if is_friend is not None %}
+            {% if is_friend %}
+                <button id="friendRequestButton" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-users"></i></button>
+            {% else %}
+                <button id="friendRequestButton" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-user-clock"></i></button>
+            {% endif %}
+        {% else %}
+            <button id="friendRequestButton" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-paper-plane"></i></button>
+        {% endif %}
     {% endif %}
 {% endif %}
 

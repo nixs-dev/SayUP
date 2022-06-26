@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models.query import QuerySet
 
 class User(models.Model):
     photo = models.BinaryField(null=True)
@@ -11,8 +11,8 @@ class User(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=60)
     classname_fontawesome = models.CharField(max_length=40)
-    
 
+   
 class Question(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.RESTRICT)
@@ -27,6 +27,7 @@ class Choice(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice = models.IntegerField()
+
 
 class FriendRequest(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_sender_id')

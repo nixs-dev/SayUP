@@ -24,8 +24,7 @@ function send_friendrequest(user_id) {
     });
 }
 
-function accept_friendrequest(fr_id, accept) {
-    let elem = document.querySelector('#friend-request-' + fr_id.toString());
+function accept_friendrequest(elem, fr_id, accept) {
     let cookie = document.cookie;
     let token = cookie.substring(cookie.indexOf("=") + 1);
     let data = new FormData();

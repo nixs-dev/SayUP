@@ -27,6 +27,20 @@ body {
     left: 0;
 }
 
+.mainContainer #pendentFriendRequest {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 5px 5px 5px;
+    background-color: #99ff99;
+    border-bottom: 2px solid #00e600;
+}
+
 .mainContainer img {
     width: 70%;
     height: 30%;
