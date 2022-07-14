@@ -1,5 +1,7 @@
 from django.db import models
 from django.db.models.query import QuerySet
+from django.utils.translation import gettext_lazy as _
+
 
 class User(models.Model):
     photo = models.BinaryField(null=True)
@@ -30,6 +32,28 @@ class Choice(models.Model):
 
 
 class FriendRequest(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_sender_id')
-    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_recipient_id')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='fr_user_sender_id')
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='fr_user_recipient_id')
     accepted = models.BooleanField(default=False)
+
+
+class UserReport(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='report_user_sender_id')
+    violator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='report_user_violator_id')
+    reason = models.CharField(null=True, max_length=200)
+
+
+class QuestionReport(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='report_question_sender_id')
+    violator = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='report_question_violator_id')
+    reason = models.CharField(null=True, max_length=200)
+
+
+class Punishment(models.Model):
+    class PunishmentType(models.IntegerChoices):
+        BAN = 1, _('Banned')
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    punishment = models.IntegerField(choices=PunishmentType.choices)
+    begin = models.DateTimeField(auto_now_add=True)
+    end = models.DateTimeField(null=True)
