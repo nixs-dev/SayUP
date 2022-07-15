@@ -12,10 +12,10 @@ class PrivateUserView(APIView):
     
     def get(self, request):
         user_id = request.query_params.get('user_id')
-        users = User.objects.get(id=user_id)
-        serializer = UserSerializer(users, many=False)
+        user = User.objects.filter(id=user_id).first()
+        serializer = UserSerializer(user, many=False)
         
-        return Response({"users": serializer.data})
+        return Response({"users": serializer.data if user else None})
     
     def post(self, request):
         return Response({"r": "Its working"})
@@ -35,10 +35,11 @@ class PrivateQuestionView(APIView):
         if all_polls:
             questions = Question.objects.all()
         else:
-            questions = Question.objects.filter(id=request.query_params.get('poll_id'))
+            questions = Question.objects.filter(id=request.query_params.get('poll_id')).first()
             
-        serializer = QuestionSerializer(questions, many=True)
-        return Response({"polls": serializer.data})
+        serializer = QuestionSerializer(questions, many=all_polls)
+        
+        return Response({"polls": serializer.data if questions else None})
     
     def post(self, request):
         return Response({"r": "Its working"})
