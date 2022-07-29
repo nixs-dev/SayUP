@@ -1,4 +1,70 @@
-.lightButton {
+.light-button {
 	border: solid 1px black;
-	width: 25%;
+	background-color: #FFFFFF;
+	border-radius: 3%;
+}
+
+.blue-button {
+  font-size:15px;
+  font-family:Arial;
+  width:140px;
+  height:50px;
+  border-width:1px;
+  color:#fff;
+  border-color:#599bb3;
+  font-weight:bold;
+  border-top-left-radius:8px;
+  border-top-right-radius:8px;
+  border-bottom-left-radius:8px;
+  border-bottom-right-radius:8px;
+  box-shadow: 0px 10px 14px -7px #276873;
+  text-shadow: 0px 1px 0px #3d768a;
+  background:linear-gradient(rgba(52, 177, 222, 1), #408c99);
+}
+
+.blue-button a {
+    color: white;
+}
+
+.blue-button:hover {
+  background: linear-gradient(#408c99, rgba(52, 177, 222, 1));
+}
+
+.dark-blue-button {
+	box-shadow:inset 0px 0px 15px 3px #23395e;
+	background:linear-gradient(to bottom, #2e466e 5%, #415989 100%);
+	background-color:#2e466e;
+	border-radius:17px;
+	border:1px solid #1f2f47;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:6px 13px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #263666;
+}
+.dark-blue-button:hover {
+	background:linear-gradient(to bottom, #415989 5%, #2e466e 100%);
+	background-color:#415989;
+}
+
+.dark-blue-button:active {
+	position:relative;
+	top:1px;
+}
+
+.accept-button {
+    background-color: #66ff99;
+    color: #009933;
+    border: 2px solid #009933;
+    border-radius: 50%;
+}
+
+.reject-button {
+    background-color: #ff6682;
+    color: #cc0025;
+    border: 2px solid #cc0025;
+    border-radius: 50%;
 }

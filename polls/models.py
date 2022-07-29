@@ -4,9 +4,15 @@ from django.utils.translation import gettext_lazy as _
 
 
 class User(models.Model):
+    GENDER_CHOICES = (
+        (None, 'Outro'),
+        (True, 'Masculino'),
+        (False, 'Feminino'),
+    )
+    
     photo = models.BinaryField(null=True)
     username = models.CharField(max_length=30, unique=True)
-    gender = models.CharField(max_length=30)
+    gender = models.BooleanField(choices=GENDER_CHOICES, null=True)
     password = models.CharField(max_length=30)
     
 
@@ -50,10 +56,11 @@ class QuestionReport(models.Model):
 
 
 class Punishment(models.Model):
-    class PunishmentType(models.IntegerChoices):
-        BAN = 1, _('Banned')
+    PUNISHMENT_CHOICES = (
+        (1, 'Banned'),
+    )
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    punishment = models.IntegerField(choices=PunishmentType.choices)
+    punishment = models.IntegerField(choices=PUNISHMENT_CHOICES)
     begin = models.DateTimeField(auto_now_add=True)
     end = models.DateTimeField(null=True)

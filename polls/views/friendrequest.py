@@ -1,23 +1,10 @@
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.template import loader
-from .models import User
-from .models import FriendRequest
+from polls.models import User
+from polls.models import FriendRequest
 import json
 
-
-def get_friendrequests(request):
-    template = loader.get_template('polls/friend_requests_modal.html')
-    
-    requests_sent = FriendRequest.objects.filter(sender_id=request.session['user']['id'], accepted=False)
-    requests_received = FriendRequest.objects.filter(recipient_id=request.session['user']['id'], accepted=False)
- 
-    context = {
-        'requests_sent': requests_sent,
-        'requests_received': requests_received
-    }
-    
-    return template.render(context, request)
 
 def send(request):
     user_id = request.POST['user_id']

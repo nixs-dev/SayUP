@@ -1,14 +1,16 @@
 body {
 	display: flex;
 	flex-direction: row;
-	background: url("../imgs/mainBackground.jpg") no-repeat center center fixed; 
+	background: url("../imgs/home_background.jpg") no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    
+    min-height: 100vh;
 }
 
-.optionInfo {
+.option-info {
     display: flex;
     flex-direction: row;
 }
@@ -20,7 +22,7 @@ body {
 	width: 80%;
 }
 
-.bar-representation .voteQuantifier {
+.bar-representation .vote-quantifier {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -33,106 +35,138 @@ body {
 	border-color: white;
 }
 
-.bar-representation .votesPercentage {
+.bar-representation .vote-quantifier.user-choice {
+	background-color: #cc99ff;
+}
+
+.bar-representation .votes-percentage {
     width: 20%;
 }
 
-.sideBar {
+.side-bar {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	background-color: black;
-	height: 100%;
-	width: 30%;
+	height: 100vh;
+	width: 40%;
+	
+	padding-bottom: 10px;
 }
 
-.sideBar .logout {
+.side-bar .logout {
 	color: white;
 	align-self: flex-start;
 	font-size: 20px;
 	cursor: pointer;
 }
 
-.sideBar .mainInfo {
+.side-bar .main-info {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	text-align: center;
+	
+	width: 80%;
+	height: 30%;
 }
 
-.sideBar .mainInfo label {
+.side-bar .main-info label {
 	color: white;
 	font-family: BehindTS;
-	font-size: 50;
-	margin-bottom: 20px;
+	font-size: 5vh;
 }
 
-.sideBar .mainInfo img {
-	width: 200;
-	height: 200;
+.side-bar .main-info img {
+	width: 80%;
+	height: 60%;
 	border-radius: 50%;
 }
 
-.sideBar .userOptions {
+.side-bar .user-options {
 	background-color: white;
-	width: 50%;
-
-	margin-top: 30px;
+	width: 90%;
+	height: 50%;
 }
 
-.sideBar .userOptions .userOption {
+.side-bar .user-options .user-option {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
 	width: 100%;
-	padding: 10px;
+	height: 20%;
+	font-size: 100%;
 	border: 2mm ridge rgb(115, 115, 115);
 	cursor: pointer;
 }
 
-.sideBar .userOptions .userOption:hover {
+.side-bar .user-options .user-option:hover {
 	color: blueviolet;
 }
 
-.pollsContent {
-    width: 70%;
-    height: 100%;
+.side-bar .user-options .user-option a {
+	text-decoration: none;
+	color: black;
 }
 
-.categoriesContainer {
+.polls-content {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    
+    width: 70%;
+    height: 100vh;
+}
+
+.categories-container {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 20%;
+    width: 85%;
     background-color: white;
     border-radius: 7%;
     padding: 10px 10px 10px 10px;
+    
+    -webkit-box-shadow: 5px 5px 15px 5px #5F5F5F; 
+    box-shadow: 5px 5px 15px 5px #5F5F5F;
 }
 
-.categoriesContainer table {
+.categories-container #categories-table {
+    display: grid;
     width: 100%;
+    
+    margin-bottom: 100px;
+    
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: min-content;
 }
 
-.categoriesContainer button {
+.categories-container button {
     position: absolute;
     bottom: 0;
     right: 0;
 }
 
-.pollsContainer {
+.polls-container {
 	width: 100%;
-	height: 80%;
+	height: 100%;
 	padding: 10px;
 	overflow-y: scroll;
 
 	display: grid;
-	grid-template-columns: 20fr 20fr 20fr;
+	grid-template-columns: 1fr 1fr;
 	grid-auto-rows: min-content;
 }
 
-.categoryContainer {
+.category-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    border: 2px solid blue;
+    border: 2px solid #0099cc;
     border-radius: 5%;
     background-color: white;
 }

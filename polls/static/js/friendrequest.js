@@ -18,7 +18,7 @@ function send_friendrequest(user_id) {
 		processData: false,
 		contentType: false,
 		success: function(result) {
-            let elem = document.querySelector('#friendRequestButton');
+            let elem = document.querySelector('#friend-request-button');
 		    elem.querySelector('i').className = status_icon[result];
 		}
     });

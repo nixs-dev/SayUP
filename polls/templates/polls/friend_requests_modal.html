@@ -1,8 +1,8 @@
-<div class="modal fade" id="friendRequestsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="friend-requests-modal" tabindex="-1" aria-labelledby="fr-modal-label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="fr-modal-label">Solicitações de amizade</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -20,8 +20,8 @@
                             <div class="friend-request" id="friend-request-{{ r.id }}">
                                 <label>{{ r.sender.username }}</label>
                                 <div class="friend-request-options">
-                                    <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ r.id }}, true)"><i class="fas fa-check-circle"></i></button>
-                                    <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ r.id }}, false)"><i class="fas fa-ban"></i></button>
+                                    <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ r.id }}, true)" class="accept-button"><i class="fas fa-check-circle"></i></button>
+                                    <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ r.id }}, false)" class="reject-button"><i class="fas fa-ban"></i></button>
                                 </div>
                             </div>
                         {% endfor %}
@@ -31,7 +31,7 @@
                             <div class="friend-request" id="friend-request-{{ r.id }}">
                                 <label>{{ r.recipient.username }}</label>
                                 <div class="friend-request-options">
-                                    <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ r.id }}, false)"><i class="fas fa-ban"></i></button>
+                                    <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ r.id }}, false)" class="reject-button"><i class="fas fa-ban"></i></button>
                                 </div>
                             </div>
                         {% endfor %}
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="dark-blue-button" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

@@ -9,4 +9,4 @@ class PunishmentTestCase(TestCase):
     def test_punishment_register(self):
         p = Punishment.objects.get(id=1)
         
-        print(any(1 in i for i in Punishment.punishment.field.choices))
+        print(p.get_punishment_display())

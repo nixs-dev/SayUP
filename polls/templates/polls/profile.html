@@ -1,21 +1,24 @@
 {% load static %}
 {% load filters %}
 
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Meu perfil</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <title>Perfil</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script src="https://kit.fontawesome.com/17c066a4d1.js" crossorigin="anonymous"></script>
 		
         <link href="{% static 'styles/fonts.css' %}" rel="stylesheet">
+        <link href="{% static 'styles/buttons.css' %}" rel="stylesheet">
 		<link href="{% static 'styles/profile.css' %}" rel="stylesheet">
+	    <script src="{% static 'js/user.js' %}"></script>
 	    <script src="{% static 'js/friendrequest.js' %}"></script>
         <script src="{% static 'js/utils.js' %}"></script>
     </head>
     <body>
-        <div class="mainContainer">
+        <div class="main-container">
             {{ user_info_template }}
         </div>
     </body>

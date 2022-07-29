@@ -1,0 +1,286 @@
+body {
+    background: url("../imgs/index_background.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    height: 9vh;
+    width: 100%;
+}
+
+header #logo {
+    height: 60%;
+    width: 10%;
+}
+
+.nav-item {
+    font-size: 70%;
+}
+
+.nav-item .nav-link.active {
+    background-color: #ccffff;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom: 2px solid black;
+}
+
+#user-options button img {
+    height: 60%;
+    width: 5vw;
+}
+
+#user-options ul li {
+    padding: 6px 6px 6px 6px;
+}
+
+#user-options ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.tab-content {
+    width: 100%;
+    height: 100%;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+    height: 100%;
+    
+    color: white;
+    background-color: #777777;
+    border: 2px solid black;
+}
+
+footer #go-to-top-button {
+    position: relative;
+    
+    width: 40px;
+    height: 40px;
+    
+    bottom: 10px;
+
+    border-radius: 50%;
+}
+
+footer .page-info {
+    display: flex;
+    flex-direction: row;
+    
+    justify-content: space-between;
+    
+    font-size: 2.5vw;
+    padding: 5px 5px 5px 5px;
+}
+
+footer .page-info ul {
+    list-style: none;
+}
+
+.page-social-network {
+    display: flex;
+    flex-direction: row;
+    
+    font-size: smaller;
+    
+    margin-bottom: 2px;
+    padding: 1px 1px 1px 1px;
+}
+
+.whatsapp-network {
+    background-color: green;
+}
+
+.facebook-network {
+    background-color: blue;
+}
+
+.twitter-network {
+    background-color: #00acee;
+}
+
+.instagram-network {
+    background-color: #fb3958;
+}
+
+footer .author-info {
+    display: flex;
+    flex-direction: row;
+    
+    justify-content: center;
+    align-items: center;
+    
+    font-size: 2.5vw;
+    background-color: #333333;
+}
+
+/* 
+    MAIN TAB
+*/
+
+#main-container {
+    display: flex;
+    flex-direction: row;
+    
+	align-items: center;
+	justify-content: center;
+	
+	background-color: white;
+	
+	width: 100%;
+	padding-top: 50px;
+	padding-bottom: 50px;
+    margin-top: 200px;
+    margin-bottom: 200px;
+    
+    -webkit-box-shadow: 5px 5px 15px 5px #000000; 
+    box-shadow: 5px 5px 15px 5px #000000;
+}
+
+#main-container img {
+    width: 50%;
+    margin-right: 10px;
+}
+
+#main-container div h1 {
+    color: #000000;
+}
+
+#main-container div p {
+    color: #555555;
+}
+
+#page-description {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    
+    margin-top: 200px;
+    margin-bottom: 200px;
+    
+    padding: 10px 10px 10px 10px;
+}
+
+#info-carousel {
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 50vh;
+}
+
+#qualities-container {
+    display: flex;
+    flex-direction: row;
+    
+    justify-content: space-between;
+    
+    height: 20vh;
+    
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+#qualities-container .quality {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    
+    height: 100%;
+}
+
+#qualities-container .quality img {
+    height: 30%;
+}
+
+/*
+    EVENTS TAB
+*/
+
+#events-body-tab #events {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    
+    max-height: 80vh;
+    overflow-y: auto;
+    
+    margin-bottom: 200px;
+}
+
+.event {
+    display: flex;
+    flex-direction: row;
+    
+    align-items: center;
+    
+    background-color: white;
+    border-radius: 10px;
+    
+    width: 80%;
+    flex: 0 0 auto;
+    margin-bottom: 10px;
+}
+
+.event img {
+    width: 40%;
+    height: 15vh;
+    
+    margin-right: 10px;
+}
+
+.event .event-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.event .event-info span {
+    color: gray;
+    font-size: smaller;
+}
+
+.event .event-info p {
+    font-size: smaller;
+    margin-top: 10px;
+}
+
+/* 
+    ABOUT TAB
+*/
+
+#about-page-text {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    
+    margin-top: 50px;
+    margin-bottom: 200px;
+    padding: 5px 5px 5px 5px;
+}
+
+#about-page-text p {
+    font-size: smaller;
+}

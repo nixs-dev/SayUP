@@ -1,21 +1,20 @@
 {% load static %}
 {% load filters %}
 
-{% if user.photo is None %}
-	{% if user.gender == 'Masculino' %}
-		<img id="photo_preview" src="{% static 'imgs/defaultMaleIcon.png' %}" onclick="document.querySelector('#profile_photo').click()">
-    {% elif user.gender == 'Feminino' %}
-		<img id="photo_preview" src="{% static 'imgs/defaultFemaleIcon.png' %}" onclick="document.querySelector('#profile_photo').click()">
-	{% endif %}
-{% else %}
-    <img id="photo_preview" src="data:image;base64,{{ user.photo|binary_to_b64 }}" onclick="document.querySelector('#profile_photo').click()">
-{% endif %}
 
-<form method="POST" action="/auth/profile/update" class="d-flex flex-column" enctype="multipart/form-data">
+<img id="photo-preview" src="{{ user|get_profile_photo_src }}" onclick="document.querySelector('#profile-photo').click()">
+
+<a class="text-decoration-none text-danger fw-bold" onclick="reset_photo = true">Remover foto atual</a>
+
+<form method="POST" class="d-flex flex-column" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="file" name="photo" id="profile_photo" class="form-control invisible" accept=".jpg, .jpeg, .png" onchange="file_to_preview(this, document.querySelector('#photo_preview'))">
-    <input type="text" name="username" value="{{ user.username }}" class="form-control">
-    <input type="password" name="password" value="{{ user.password }}" class="form-control">
     
-    <button type="submit" class="btn btn-outline-secondary">Salvar</button>
+    <input type="file" name="photo" id="profile-photo" class="form-control invisible" accept=".jpg, .jpeg, .png" onchange="file_to_preview(this, document.querySelector('#photo-preview')); reset_photo = false;">
+    
+    <div class="mb-2">
+        <input type="text" name="username" value="{{ user.username }}" class="form-control">
+        <input type="password" name="password" value="{{ user.password }}" class="form-control">
+    </div>
+    
+    <button type="button" class="light-button" onclick="update(this.parentNode)">Salvar</button>
 </form>

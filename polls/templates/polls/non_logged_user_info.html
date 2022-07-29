@@ -3,38 +3,30 @@
 
 {% if someone_is_logged %}
     {% if pendent_friend_request %}
-        <div id="pendentFriendRequest">
+        <div id="pendent-friend-request">
             <p>Você possui uma requisição de amizade pendente de {{ pendent_friend_request.sender.username }}
             </p>
             <div class="d-flex flex-row">
-                <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ pendent_friend_request.id }}, true)"><i class="fas fa-check-circle"></i></button>
-                <button onclick="accept_friendrequest(this.parentNode.parentNode, {{ pendent_friend_request.id }}, false)"><i class="fas fa-ban"></i></button>
+                <button class="accept-button" onclick="accept_friendrequest(this.parentNode.parentNode, {{ pendent_friend_request.id }}, true)"><i class="fas fa-check-circle"></i></button>
+                <button class="reject-button" onclick="accept_friendrequest(this.parentNode.parentNode, {{ pendent_friend_request.id }}, false)"><i class="fas fa-ban"></i></button>
             </div>
         </div>
     {% else %}
         {% if is_friend is not None %}
             {% if is_friend %}
-                <button id="friendRequestButton" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-users"></i></button>
+                <button id="friend-request-button" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-users"></i></button>
             {% else %}
-                <button id="friendRequestButton" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-user-clock"></i></button>
+                <button id="friend-request-button" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-user-clock"></i></button>
             {% endif %}
         {% else %}
-            <button id="friendRequestButton" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-paper-plane"></i></button>
+            <button id="friend-request-button" onclick="send_friendrequest({{ user.id }})"><i class="fas fa-paper-plane"></i></button>
         {% endif %}
     {% endif %}
 {% endif %}
 
-{% if user.photo is None %}
-	{% if user.gender == 'Masculino' %}
-		<img src="{% static 'imgs/defaultMaleIcon.png' %}">
-	{% elif user.gender == 'Feminino' %}
-		<img src="{% static 'imgs/defaultFemaleIcon.png' %}">
-	{% endif %}
-{% else %}
-    <img src="data:image;base64,{{ user.photo|binary_to_b64 }}">
-{% endif %}
+<img src="{{ user|get_profile_photo_src }}">
 
 <div class="d-flex flex-column">
     <label>{{ user.username }}</label>
-    <label>Sexo {{ user.gender }}</label>
+    <label>Sexo {{ user.get_gender_display }}</label>
 </div>

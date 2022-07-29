@@ -60,8 +60,8 @@ class PrivateReportView(APIView):
         question_serializer = QuestionReportSerializer(questions, many=True)
         
         return Response({
-            "users": user_serializer.data,
-            "questions": question_serializer.data
+            "users": user_serializer.data if users else [],
+            "questions": question_serializer.data if questions else []
         })
 
 

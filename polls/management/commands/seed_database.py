@@ -6,17 +6,17 @@ class Command(BaseCommand, ABC):
     help = 'Seed database'
     users = [
         {
-            'gender': 'Masculino',
+            'gender': True,
             'username': 'Lucas',
             'password': '123'
         },
         {
-            'gender': 'Feminino',
+            'gender': False,
             'username': 'Felipa',
             'password': '123'
         },
         {
-            'gender': 'Outro',
+            'gender': None,
             'username': 'Felipe',
             'password': '123'
         }

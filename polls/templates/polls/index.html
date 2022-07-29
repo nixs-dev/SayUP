@@ -1,65 +1,195 @@
-{% load static %}
 {% load filters %}
+{% load static %}
 
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>Vote</title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <head>
+        <title>Enquetes</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 		<script src="https://kit.fontawesome.com/17c066a4d1.js" crossorigin="anonymous"></script>
+		<link href="{% static 'styles/buttons.css' %}" rel="stylesheet">
+		<link href="{% static 'styles/index.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <img id="logo" src="{% static 'imgs/logo.png' %}">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-body-tab" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events-body-tab" type="button" role="tab" aria-controls="events" aria-selected="false">Eventos</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about-body-tab" type="button" role="tab" aria-controls="about" aria-selected="false">Sobre</button>
+                </li>
+            </ul>
+            {% if user %}
+                <div class="dropdown" id="user-options">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ user|get_profile_photo_src }}" alt="menu">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" role="menu" aria-labelledby="dropdown-trigger">
+                        <h6 class="dropdown-header">{{ user.username }}</h6>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/profiles/{{ user.username }}">Meu perfil</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/home">Minha área</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/logout">Sair</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <a href="/auth/login" class="dark-blue-button">Entrar</a>
+            {% endif %}
+        </header>
+        <main class="tab-content">
+            <div id="home-body-tab" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                <div id="main-container">
+                    <img src="{% static 'imgs/main_container_repr.png' %}">
+                    <div>
+                        <h1>SayUp</h1>
+                        <p>Slogan bem aqui</p>
+                        <button class="blue-button" onclick="window.location = '/auth/register'">Fazer parte</button>
+                    </div>
+                </div>
+                <div id="page-description">
+                    <h2>SayUp</h2>
+                    <p class="text-wrap text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum dignissim tellus sed vulputate. Maecenas quis tellus vulputate metus placerat semper. Vestibulum elit velit, tempor a sollicitudin quis, aliquet a lacus. Etiam ac aliquam est, vitae rhoncus lectus. Donec ultricies hendrerit ligula sit amet venenatis. Integer vel mollis augue. Sed id lectus at enim imperdiet porttitor. Etiam porta vulputate orci, ultrices dapibus risus dignissim vel. Quisque vel dolor non augue maximus convallis at eu magna. Quisque eu condimentum odio.
+                    </p>
+                </div>
+                <div id="info-carousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#info-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#info-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#info-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static 'imgs/carousel_info_1.jpg' %}">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'imgs/carousel_info_2.jpg' %}">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'imgs/carousel_info_3.jpg' %}">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#info-carousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#info-carousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div id="qualities-container">
+                    <div class="quality">
+                        <img src="{% static 'imgs/quality_1_icon.png' %}">
+                        <p>Moderação ativa</p>
+                    </div>
+                    <div class="quality">
+                        <img src="{% static 'imgs/quality_2_icon.png' %}">
+                        <p>100% Gratuito</p>
+                    </div>
+                    <div class="quality">
+                        <img src="{% static 'imgs/quality_3_icon.png' %}">
+                        <p>Seguro</p>
+                    </div>
+                </div>
+            </div>
+            <div id="events-body-tab" class="tab-pane fade" role="tabpanel" aria-labelledby="events-tab">
+                <div id="events">
+                    <h2>Eventos</h2>
+                    <div class="event">
+                        <img src="{% static 'imgs/event_default_image.png' %}">
+                        <div class="event-info">
+                            <h4>Evento</h4>
+                            <span>Local</span>
+                            <span>Data - Horario</span>
+                            <p class="text-wrap">Sobre </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="about-body-tab" class="tab-pane fade" role="tabpanel" aria-labelledby="about-tab">
+                <div id="about-page-text">
+                    <h1>Sobre o projeto</h1>
+                    <p class="text-wrap text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed laoreet ex id nulla tincidunt sagittis. Maecenas vitae erat sapien. Vivamus ac magna lacus. Nunc vehicula, ligula id commodo hendrerit, sem magna tempor nisl, vel imperdiet metus justo in arcu. Morbi hendrerit turpis sed augue imperdiet, at blandit eros interdum. Quisque vel augue facilisis, convallis nibh ac, accumsan arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque euismod sagittis leo, eu laoreet risus viverra at. Sed nisl odio, sodales a leo vel, porttitor molestie mi. Pellentesque sodales imperdiet ante, mollis facilisis nisi consequat id. Sed eget dolor risus. Aliquam vitae nibh felis. Praesent interdum sapien eget ipsum rhoncus accumsan.
 
-		<link href="{% static 'styles/fonts.css' %}" rel="stylesheet">
-        <link href="{% static 'styles/buttons.css' %}" rel="stylesheet">
-		<link href="{% static 'styles/polls.css' %}" rel="stylesheet">
-		<script src="{% static 'js/polls.js' %}"></script>
-		<script src="{% static 'js/friendrequest.js' %}"></script>
-	</head>
-	<body>
-		<div class="sidebar">
-			<a href="logout" class="logout"><i class="fas fa-sign-out-alt"></i></a>
-			<div class="mainInfo">
-				<label>{{ user.username }}</label>
-				{% if user.photo is None %}
-        			{% if user.gender == 'Masculino' %}
-        				<img src="{% static 'imgs/defaultMaleIcon.png' %}">
-        			{% elif user.gender == 'Feminino' %}
-        				<img src="{% static 'imgs/defaultFemaleIcon.png' %}">
-        			{% endif %}
-        		{% else %}
-        		    <img src="data:image;base64,{{ user.photo|binary_to_b64 }}">
-        		{% endif %}
-			</div>
-			<div class="userOptions">
-				<div class="userOption">
-					<a href="profiles/{{ user.username }}">Perfil</a>
-				</div>
-				<div class="userOption">
-					<a data-bs-toggle="modal" data-bs-target="#addPollModal">Criar enquete</a>
-				</div>
-				<div class="userOption">
-                    <a data-bs-toggle="modal" data-bs-target="#friendRequestsModal">Amigos</a>
-				</div>
-				<div class="userOption">
-					Configurações
-				</div>
-				<div class="userOption">
-					Sobre
-				</div>
-			</div>
-		</div>
-		<div class="pollsContent">
-		    <div class="categoriesContainer">
-		        {{ categories }}
-		        
-		        <button onclick="reload_all_polls(null)" class="ligthButton">Resetar</button>
-		    </div>
-		    <div class="pollsContainer">
-			    {{ polls }}
-		    </div>
-	    </div>
-	</body>
-	
-    {{ add_poll_modal }}
-    {{ friend_requests_modal }}
+                        Pellentesque scelerisque quam vel nisl congue, id aliquam est egestas. Integer mollis, nisi sollicitudin gravida lacinia, lorem ipsum pharetra diam, quis euismod risus nisi ac neque. Pellentesque porta sem tincidunt mauris ullamcorper venenatis. In at magna ac diam mollis volutpat ut sit amet felis. Vestibulum tempus nibh ipsum, quis elementum arcu fringilla faucibus. Sed vel ipsum vitae orci scelerisque interdum. Sed et felis venenatis, lacinia urna nec, sodales ipsum. Etiam enim velit, blandit vitae suscipit in, euismod id ligula. Nunc aliquam faucibus dui. Pellentesque vel varius nisl. Maecenas non sem pretium, aliquet purus et, tincidunt est. Sed auctor est elit, ut aliquet lectus gravida a. Integer pharetra libero eu elit elementum sodales. Integer tellus lorem, tristique at posuere a, tincidunt fermentum mauris. Aliquam turpis nunc, placerat a varius at, efficitur ut felis.
+
+                        Praesent interdum ipsum dignissim, aliquet tellus eu, sagittis nisl. Donec facilisis tempus vulputate. Praesent egestas sed velit at dapibus. Proin porttitor et elit non consectetur. Suspendisse lobortis at magna eu rhoncus. Etiam nulla justo, elementum sit amet mauris sed, efficitur elementum massa. Etiam vulputate vulputate leo, vel ultrices ipsum tempus sit amet. Sed nec velit eu diam viverra blandit id in metus. Curabitur a feugiat dui. Curabitur ultrices nulla eu molestie lacinia.
+
+                        Suspendisse non dolor facilisis, malesuada elit id, rutrum lacus. Aliquam ultrices porta diam id sodales. Donec fermentum tempus mattis. Aliquam feugiat purus vitae augue maximus, vitae pellentesque metus sollicitudin. Etiam viverra augue dolor, ac fermentum sapien sollicitudin in. Sed malesuada, arcu ut vulputate aliquam, urna ipsum volutpat lorem, sed rhoncus ex metus congue libero. Mauris eros purus, feugiat ut eros at, dictum maximus mauris. Integer nec tempus tortor. Aliquam erat volutpat. Praesent placerat imperdiet ex. Aenean et vulputate ex, sit amet egestas augue. Ut sodales erat lectus, in ultrices lorem consectetur id. Donec mauris magna, fringilla sit amet bibendum a, viverra ut nisl. Nunc sapien lectus, aliquam a quam non, sollicitudin laoreet tellus.
+
+                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed nec velit enim. Mauris aliquet tortor nibh, vitae pretium orci tristique ac. Proin lacinia turpis nisl, commodo tristique lectus facilisis non. Donec ex neque, vehicula non magna ac, cursus tempor arcu. In at sapien et magna placerat ultricies. Curabitur dictum arcu orci, id accumsan massa dapibus congue. Mauris eget arcu sed sem pulvinar tristique. Donec sit amet neque vitae magna lacinia sodales id non sapien. Nunc ultrices ex et sapien egestas bibendum.
+                    </p>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <button id="go-to-top-button" onclick="window.scrollTo(0, 0);">^</button>
+            <div class="page-info">
+                <ul>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                </ul>
+                <ul>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                </ul>
+                <ul>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                    <li>aghaah</li>
+                </ul>
+                <div class="d-flex flex-column">
+                    <p>Contato</p>
+                    <div class="d-flex flex-column">
+                        <div class="page-social-network whatsapp-network">
+                            <i class="fab fa-whatsapp"></i>
+                            Whatsapp
+                        </div>
+                        <div class="page-social-network instagram-network">
+                            <i class="fab fa-instagram"></i>
+                            Instagram
+                        </div>
+                        <div class="page-social-network facebook-network">
+                            <i class="fab fa-facebook"></i>
+                            Facebook
+                        </div>
+                        <div class="page-social-network twitter-network">
+                            <i class="fab fa-twitter"></i>
+                            Twitter
+                        </div>
+                    </div>
+                </div>   
+            </div>
+            <div class="author-info">
+                <p class="m-0">Desenvolvido por <a href="https://www.github.com/nixs-dev">nixs-dev</a>. Agosto, 2022.</p>
+            </div>
+        </footer>
+    </body>
 </html>

@@ -1,21 +1,20 @@
 from django.urls import path
-from . import views
-from . import views_user
-from . import views_friendrequest
+from .views import web, user, poll, friendrequest
 
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('vote', views.vote, name='vote'),
-    path('save_poll', views.new_poll, name='save_poll'),
-    path('polls', views.update_polls, name='polls'),
-    path('profiles/<str:username>', views_user.get_profile, name='user_profile'),
-    path('profiles/actions/sendfriendrequest', views_friendrequest.send, name='send_friendrequest'),
-    path('profiles/actions/acceptfriendrequest', views_friendrequest.accept, name='accept_friendrequest'),
-    path('auth/login', views_user.loginPage, name='login'),
-    path('auth/register', views_user.registerPage, name='register'),
-    path('auth/login/check', views_user.login, name='loginCheck'),
-    path('auth/register/check', views_user.register, name='registerCheck'),
-    path('auth/profile/update', views_user.update, name="updateProfile"),
-    path('logout', views_user.logout),
+    path('', web.index, name='index'),
+    path('home', web.home, name='home'),
+    path('vote', poll.vote, name='vote'),
+    path('save_poll', poll.new_poll, name='save_poll'),
+    path('polls', web.update_polls, name='polls'),
+    path('profiles/<str:username>', web.get_profile, name='user_profile'),
+    path('profiles/actions/sendfriendrequest', friendrequest.send, name='send_friendrequest'),
+    path('profiles/actions/acceptfriendrequest', friendrequest.accept, name='accept_friendrequest'),
+    path('auth/login', web.login, name='login'),
+    path('auth/register', web.register, name='register'),
+    path('auth/login/check', user.login, name='loginCheck'),
+    path('auth/register/check', user.register, name='registerCheck'),
+    path('auth/profile/update', user.update, name="updateProfile"),
+    path('logout', user.logout),
 ]

@@ -22,17 +22,18 @@ class checkAuthenticated:
         url = request.path + '/' if not request.path.endswith('/') else request.path
         logged_in = 'user' in request.session.keys()
         
-        if self.check_url_match(url, self.MUST_NOT):
-            if logged_in:
-                return redirect('/')
-            else:
-                return None
-        elif self.check_url_match(url, self.NOT_MATTER):
-            return None
-        else:
-            if logged_in:
+        if url != '/':
+            if self.check_url_match(url, self.MUST_NOT):
+                if logged_in:
+                    return redirect('/home')
+                else:
+                    return None
+            elif self.check_url_match(url, self.NOT_MATTER):
                 return None
             else:
-                return redirect('/auth/login')
+                if logged_in:
+                    return None
+                else:
+                    return redirect('/auth/login')
                 
         return None

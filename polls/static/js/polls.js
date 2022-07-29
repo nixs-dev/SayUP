@@ -5,7 +5,7 @@ function reload_all_polls(category) {
 		processData: false,
 		contentType: false,
 		success: function(result){
-			document.querySelector('.pollsContainer').innerHTML = result;
+			document.querySelector('.polls-container').innerHTML = result;
 		}
 	});
 }
@@ -40,11 +40,10 @@ function save_poll() {
 }
 
 function sendVote(form, option) {
-    alert('oi');
-	o = option.id;
-	form.querySelector('#optionSelected').value = o;
+	let o = option.id;
+	form.querySelector('#option-selected').value = o;
 	formdata = new FormData(form);
-    alert('oi');
+	
 	$.ajax({
 		url: "vote",
 		type: "POST",

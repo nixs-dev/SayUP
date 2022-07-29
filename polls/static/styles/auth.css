@@ -1,14 +1,14 @@
 body {
-	background: url("../imgs/authBackground.jpeg") no-repeat center center fixed; 
+	background: url("../imgs/auth_background.jpeg") no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 
-.mainContainer {
+.main-container {
 	background-color: white;
-	width: 40%;
+	border: 1px solid black;
 
 	position: absolute;
 	top: 50%;
@@ -17,23 +17,29 @@ body {
 
 	display: flex;
 	flex-direction: column;
-	justify-items: center;
+	justify-content: center;
 	text-align: center;
+	
+	padding: 15% 15% 15% 15%;
 }
 
-.mainContainer label {
+.main-container h1 {
 	font-family: BehindTS;
-	font-size: 70px;
+	color: black;
 }
 
-.mainContainer form input {
-	box-shadow: 10px 5px 5px #a6a6a6;
+.main-container form {
+    width: 60vw;
 }
 
-.mainContainer form .error {
+.main-container form input {
+	width: 100%;
+}
+
+.main-container form .error {
 	color: #FF0000;
 }
 
-.mainContainer .create-account {
+.main-container .create-account {
     align-self: flex-end;
 }

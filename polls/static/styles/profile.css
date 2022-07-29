@@ -4,9 +4,9 @@ body {
     background-color: #33bbff;
 }
 
-.mainContainer {
+.main-container {
 	background-color: white;
-	width: 40%;
+	width: 60%;
 
 	position: absolute;
 	top: 50%;
@@ -18,16 +18,18 @@ body {
 	justify-content: center;
 	align-items: center;
 	
-	padding: 3% 3% 3% 3%;
+	padding: 6% 6% 6% 6%;
 }
 
-.mainContainer #friendRequestButton {
+.main-container #friend-request-button {
     position: absolute;
     top: 0;
     left: 0;
+    
+    border-radius: 50%;
 }
 
-.mainContainer #pendentFriendRequest {
+.main-container #pendent-friend-request {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -37,12 +39,18 @@ body {
     left: 0;
     width: 100%;
     padding: 5px 5px 5px 5px;
-    background-color: #99ff99;
+    background-color: rgba(153, 255, 153, 0.7);
     border-bottom: 2px solid #00e600;
+    
+    font-size: 60%;
 }
 
-.mainContainer img {
+.main-container img {
     width: 70%;
     height: 30%;
+    margin-bottom: 20px;
+}
+
+#user-info {
     margin-bottom: 20px;
 }

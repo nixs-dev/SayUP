@@ -1,0 +1,8 @@
+<div id="categories-table">
+    {% for i in categories %}
+       <div class="category-container" onclick="reload_all_polls({{ i.id }})">
+            <i class="{{ i.classname_fontawesome }}"></i>
+            <label> {{ i.name }} </label>
+        </div>
+    {% endfor %}
+</div>
