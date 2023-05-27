@@ -96,6 +96,13 @@ main {
     height: 100%;
 }
 
+.inner-tab-content h2 {
+    font-family: BehindTS;
+    font-size: 3rem;
+
+    margin: 0;
+}
+
 /* 
     MAIN TAB
 */
@@ -212,11 +219,15 @@ main {
     height: 100dvh;
 }
 
+#events-body-tab .inner-tab-content {
+    gap: 2rem;
+}
+
 #events-body-tab #events {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.5rem;
     
     max-height: 80dvh;
     overflow-y: auto;
@@ -231,12 +242,12 @@ main {
     background-color: white;
     border-radius: 0.1rem;
 
-    padding: 0.1rem 0.2rem;
+    padding: 0.5rem 2rem;
 }
 
 .event img {
-    width: 25%;
-    height: auto;
+    width: auto;
+    height: 10rem;
 }
 
 .event .event-info {
@@ -256,6 +267,10 @@ main {
 /* 
     ABOUT TAB
 */
+
+#about-body-tab .inner-tab-content {
+    gap: 2rem;
+}
 
 #about-page-text {
     display: flex;
