@@ -7,15 +7,18 @@ from polls.models import Choice
 from polls.models import Question
 from polls.models import Category
 from polls.models import FriendRequest
+from polls.models import Event
 from . import poll, friendrequest
 import json
 
 
 def index(request):
     template = loader.get_template('polls/index.html')
+    events = Event.objects.all()
     
     context = {
-        'user': request.session['user'] if 'user' in request.session else None
+        'user': request.session['user'] if 'user' in request.session else None,
+        'events': events
     }
 
     return HttpResponse(template.render(context, request))
@@ -57,7 +60,14 @@ def get_profile(request, username):
     user = get_object_or_404(User, username=username)
     
     general_context = {
+        'user_info_template': None,
+        'platform_user_info': {
+            'polls': Question.objects.filter(author=user).count(),
+            'contribuitions': Choice.objects.filter(author=user).count(),
+            'friends': FriendRequest.objects.filter(accepted=True, sender=user).count() + FriendRequest.objects.filter(accepted=True, recipient=user).count()
+        }
     }
+
     user_context = {
         'user': user
     }

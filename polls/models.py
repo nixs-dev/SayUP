@@ -55,6 +55,16 @@ class QuestionReport(models.Model):
     reason = models.CharField(null=True, max_length=200)
 
 
+class Event(models.Model):
+    company = models.CharField(max_length=15)
+    title = models.CharField(max_length=30)
+    description = models.CharField(max_length=200)
+    date = models.DateField()
+    start = models.TimeField()
+    end = models.TimeField()
+    address = models.CharField(max_length=100)
+
+
 class Punishment(models.Model):
     PUNISHMENT_CHOICES = (
         (1, 'Banned'),

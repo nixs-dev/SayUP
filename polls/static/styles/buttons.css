@@ -1,7 +1,22 @@
-.light-button {
-	border: solid 1px black;
-	background-color: #FFFFFF;
-	border-radius: 3%;
+.soft-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 2rem;
+  color: #708090;
+
+  border: none;
+
+  padding: 0.3rem 2rem;
+}
+
+.soft-button {
+  box-shadow: -3px -3px 7px #f5f5f5, 3px 3px 7px #bbc3cc;
+}
+
+.soft-button:active {
+  box-shadow: -3px -3px 7px #f5f5f5 inset, 3px 3px 7px #bbc3cc inset;
 }
 
 .blue-button {

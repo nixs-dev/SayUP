@@ -39,11 +39,16 @@ function save_poll() {
 	});
 }
 
-function sendVote(form, option) {
-	let o = option.id;
-	form.querySelector('#option-selected').value = o;
-	formdata = new FormData(form);
-	
+function sendVote(poll, option) {
+	let formdata = new FormData();
+	formdata.append("poll", poll);
+	formdata.append("vote", option);
+	formdata.append("csrfmiddlewaretoken", document.querySelector(`#poll-${ poll } input[name='csrfmiddlewaretoken']`).value);
+
+	let radio = document.querySelector(`#poll-${poll} #op${option} .poll-option-text input[type='radio']`);
+
+	radio.checked ? radio.checked = false : radio.checked = true;
+
 	$.ajax({
 		url: "vote",
 		type: "POST",

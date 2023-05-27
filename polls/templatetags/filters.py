@@ -18,22 +18,26 @@ def list_item(list_, index):
 
 
 @register.filter(name='get_profile_photo_src')
-def get_profile_photo_src(user):
+def get_profile_photo_src(user, default=False):
+    def photoByGender(gender):
+        if gender == True:
+        	return '/static/imgs/default_male_icon.png'
+        elif gender == False:
+            return '/static/imgs/default_female_icon.png'
+        else:
+            return '/static/imgs/default_neutral_icon.png'
+    
     src = ''
     gender = user.gender if isinstance(user, User) else user['gender']
     photo = user.photo if isinstance(user, User) else user['photo']
     
-    print(type(gender))
-    
-    if photo is None:
-        if gender == True:
-        	src = '/static/imgs/default_male_icon.png'
-        elif gender == False:
-        	src = '/static/imgs/default_female_icon.png'
-        else:
-            src = '/static/imgs/default_neutral_icon.png'
+    if default:
+        src = photoByGender(gender)
     else:
-        src = f'data:image;base64,{ binary_to_b64(photo) }'
+        if photo is None:
+            src = photoByGender(gender)
+        else:
+            src = f'data:image;base64,{ binary_to_b64(photo) }'
     
     return src
 

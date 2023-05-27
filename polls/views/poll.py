@@ -62,8 +62,8 @@ def new_poll(request):
 
 def vote(request):
     author_id = int(request.session['user']['id'])
-    poll = int(request.POST['poll'].replace('poll', ''))
-    user_vote = int(request.POST['vote'].replace('op', ''))
+    poll = int(request.POST['poll'])
+    user_vote = int(request.POST['vote'])
     poll = Question.objects.get(id=poll)
     author = User.objects.get(id=author_id)
 

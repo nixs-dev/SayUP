@@ -1,7 +1,8 @@
 body {
+	font-family: "Montserrat";
 }
 
-.mainContainer {
+#main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,4 +14,14 @@ body {
 	
 	width: 70%;
 	height: 70%;
+}
+
+#main-container img {
+	width: 60%;
+	height: auto;
+}
+
+#main-container p {
+	width: 40%;
+	text-align: justify;
 }

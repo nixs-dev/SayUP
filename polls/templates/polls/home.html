@@ -5,6 +5,8 @@
 <html>
 	<head>
 		<title>Página principal</title>
+		<link href="{% static 'imgs/favicon.ico' %}" rel="icon">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -19,24 +21,29 @@
 		<div class="side-bar">
 			<a href="logout" class="logout"><i class="fas fa-sign-out-alt"></i></a>
 			<div class="main-info">
-				<label>{{ user.username }}</label>
     		    <img src="{{ user|get_profile_photo_src }}">
+				<span>{{ user.username }}</span>
 			</div>
 			<div class="user-options">
 				<div class="user-option">
+					<i class="fa-sharp fa-regular fa-address-card"></i>
 					<a href="profiles/{{ user.username }}">Perfil</a>
 				</div>
 				<div class="user-option">
+					<i class="fa-solid fa-clipboard-question"></i>
 					<a data-bs-toggle="modal" data-bs-target="#add-poll-modal">Criar enquete</a>
 				</div>
 				<div class="user-option">
+					<i class="fa-solid fa-user-group"></i>
                     <a data-bs-toggle="modal" data-bs-target="#friend-requests-modal">Amigos</a>
 				</div>
 				<div class="user-option">
-					Configurações
+					<i class="fa-solid fa-gear"></i>
+					<a href="#">Configurações</a>
 				</div>
 				<div class="user-option">
-					Sobre
+					<i class="fa-regular fa-circle-question"></i>
+					<a href="#">Sobre</a>
 				</div>
 			</div>
 		</div>
@@ -44,7 +51,7 @@
 		    <div class="categories-container">
 		        {{ categories }}
 		        
-		        <button onclick="reload_all_polls(null)" class="light-button">Resetar</button>
+		        <button onclick="reload_all_polls(null)" class="soft-button">Limpar</button>
 		    </div>
 		    <div class="polls-container">
 			    {{ polls }}

@@ -1,5 +1,3 @@
-var reset_photo = false;
-
 function login(form) {
 	let formdata = new FormData(form);
 
@@ -20,9 +18,14 @@ function login(form) {
 	 });
 }
 
+function resetPhoto() {
+	document.querySelector("input[type='file']#profile-photo").value = "";
+	document.querySelector("img#photo-preview").src = document.querySelector("input[type='file']#profile-photo").dataset.default_picture;
+}
+
 function update(form) {
 	let formdata = new FormData(form);
-	formdata.append("reset_photo", reset_photo);
+	formdata.append("reset_photo", document.querySelector("img#photo-preview").src.replace(window.location.origin, "") == document.querySelector("input[type='file']#profile-photo").dataset.default_picture);
 	
 	$.ajax({
 		url: "/auth/profile/update",

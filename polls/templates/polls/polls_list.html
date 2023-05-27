@@ -1,44 +1,40 @@
 {% load filters %}
 
 {% for i in questions %}
-	<div class="card w-75 my-2">
-		<div class="card-header" style="background-color: #80ffff;">
-			{{ i.question_text }}
-		</div>
-		<div class="card-body p-3">
-			<form id="poll{{ i.id }}">
-				{% csrf_token %}
+	<div class="poll-card" id="poll-{{ i.id }}">
 
-				<input type="hidden" id="poll" name="poll" value="poll{{ i.id }}">
-				<input type="hidden" id="option-selected" name="vote">
-                
-                {% for op_num in 1|range_list:5 %}
-    				<div class="option-info">
-    				    {% with op_num_offset=op_num|add:'-1' %}
-        					<div class="bar-representation border border-dark rounded mb-3 p-2" onclick="sendVote(this.parentNode.parentNode, this)" id="op{{ op_num }}">
-        					    {% with op_num_str=op_num|to_str %}
-        					        {% with op_num_index='op'|add:op_num_str %}
-        					            {{ i|get_attribute:op_num_index }}
-        					        {% endwith %}
-        					    {% endwith %}
-        					    {% if op_num == choices|dict_item:i.id|list_item:-1 %}
-            						<div class="vote-quantifier user-choice border rounded" style="width: {{ choices|dict_item:i.id|list_item:op_num_offset }}%">
-            						</div>
-            			        {% else %}
-            			            <div class="vote-quantifier border rounded" style="width: {{ choices|dict_item:i.id|list_item:op_num_offset }}%">
-            						</div>
-            					{% endif %}
-        					</div>
-        					<div class="votes-percentage">
-        					    {{ choices|dict_item:i.id|list_item:op_num_offset }}%
-        					</div>
-        			    {% endwith %}
-    				</div>
-    	        {% endfor %}
-			</form>
+        <p class="poll-card-question">{{ i.question_text }}</p>
+
+		{% csrf_token %}
+
+		<div class="poll-card-options">
+		{% for op_num in 1|range_list:5 %}
+			{% with op_num_offset=op_num|add:'-1' %}
+				<div class="poll-card-option" onclick="sendVote({{ i.id }}, {{ op_num }})" id="op{{ op_num }}">
+					<div class="poll-card-option-info">
+						<div class="poll-option-text">
+							{% if op_num == choices|dict_item:i.id|list_item:-1 %}
+								<input type="radio" checked="true"/>
+							{% else %}
+								<input type="radio"/>
+							{% endif %}
+							<label class="poll-option-name">Option</label>
+						</div>
+
+						<label class="poll-option-percentage">{{ choices|dict_item:i.id|list_item:op_num_offset }}%</label>
+					</div>
+					<div class="poll-option-fill-background">
+						{% if op_num == choices|dict_item:i.id|list_item:-1 %}
+							<div class="poll-option-fill selected" style="width: {{ choices|dict_item:i.id|list_item:op_num_offset }}%"></div>
+						{% else %}
+							<div class="poll-option-fill" style="width: {{ choices|dict_item:i.id|list_item:op_num_offset }}%"></div>
+						{% endif %}
+					</div>
+				</div>
+			{% endwith %}
+		{% endfor %}
 		</div>
-        <div class="card-footer text-muted">
-            Postado por <a href="profiles/{{ i.author.username }}">{{ i.author.username }}</a>
-        </div>
-	</div>
+
+		<a class="poll-card-author" href="profiles/{{ i.author.username }}">{{ i.author.username }}</a>
+    </div>
 {% endfor %}

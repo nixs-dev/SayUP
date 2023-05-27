@@ -6,7 +6,7 @@ class Command(BaseCommand, ABC):
     help = 'Setup categories'
     categories = [
         {
-            'name': 'Tecnologia da informação',
+            'name': 'Tecnologia',
             'classname': 'fas fa-desktop'
         },
         {

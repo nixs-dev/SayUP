@@ -1,45 +1,85 @@
 body {
-	background: url("../imgs/auth_background.jpeg") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	font-family: "Montserrat";
+
+	background: url("../imgs/auth_background.jpeg");
+	background-position: center;
+	background-repeat: no-repeat; 
     background-size: cover;
+
+	height: 100dvh;
 }
 
 .main-container {
-	background-color: white;
-	border: 1px solid black;
+	display: flex;
+	min-width: 40%;
+	min-height: 60%;
+
+	border: 0.1rem solid black;
+}
+
+.main-container .repr {
+	position: relative;
+	width: 25dvw;
+	height: 100%;
+}
+
+.main-container .repr::before {
+	content: "";
 
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 
+	background-image: url("../imgs/auth_container_background.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	filter: brightness(0.3);
+}
+
+.main-container .data {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
+
+	background-color: white;
 	
-	padding: 15% 15% 15% 15%;
+	padding: 4rem;
 }
 
-.main-container h1 {
+.main-container .data h1 {
 	font-family: BehindTS;
 	color: black;
 }
 
-.main-container form {
-    width: 60vw;
-}
-
-.main-container form input {
+.main-container .data form .form-control {
 	width: 100%;
 }
 
-.main-container form .error {
+.form-check.form-switch {
+	display: flex;
+	align-items: center;
+	
+	gap: 0.2rem;
+}
+
+.form-check.form-switch .form-check-input {
+	display: flex;
+}
+
+.main-container .data form .error {
 	color: #FF0000;
 }
 
-.main-container .create-account {
+.main-container .data .create-account {
     align-self: flex-end;
 }

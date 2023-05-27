@@ -1,3 +1,7 @@
+:root {
+    --poll-main-color: #007acc;
+}
+
 body {
 	display: flex;
 	flex-direction: row;
@@ -6,41 +10,100 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+
+    font-family: "Montserrat";
     
     min-height: 100vh;
 }
 
-.option-info {
+.poll-card {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    background-color: white;
+
+    border-radius: 1rem;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: 1rem;
+    padding: 2rem;
 }
 
-.bar-representation {
-	position: relative;
-	z-index: 0;
-	cursor: pointer;
-	width: 80%;
+.poll-card-question {
+    font-size: smaller;
+    font-weight: bold;
+
+    width: 90%;
 }
 
-.bar-representation .vote-quantifier {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: #99b3ff;
-	z-index: -1;
-	height: 100%;
-	width: 0%;
-	border-color: white;
+.poll-card-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
 }
 
-.bar-representation .vote-quantifier.user-choice {
-	background-color: #cc99ff;
+.poll-card-option {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    border: 0.1rem solid #d9d9d9;
+    border-radius: 0.5rem;
+
+    font-size: small;
+    padding: 0.5rem;
 }
 
-.bar-representation .votes-percentage {
-    width: 20%;
+.poll-card-option * {
+    cursor: pointer;
+}
+
+.poll-card-option.option-selected {
+    border: 0.1rem solid var(--poll-main-color);
+}
+
+.poll-card-option .poll-card-option-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.poll-card-option-info .poll-card-option-text {
+}
+
+.poll-option-fill-background {
+    position: relative;
+
+    background-color: #d9d9d9;
+    border-radius: 0.3rem;
+
+    width: 100%;
+    height: 0.4rem;
+}
+
+.poll-option-fill-background .poll-option-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-color: #bfbfbf;
+
+    width: 40%;
+    height: 100%;
+
+    border-radius: inherit;
+}
+
+.poll-option-fill-background .poll-option-fill.selected {
+    background-color: var(--poll-main-color);
+}
+
+.poll-card-author {
+    align-self: center;
+
+    font-size: smaller;
 }
 
 .side-bar {
@@ -48,8 +111,8 @@ body {
 	flex-direction: column;
 	align-items: center;
 	background-color: black;
-	height: 100vh;
-	width: 40%;
+	height: 100dvh;
+	width: 20%;
 	
 	padding-bottom: 10px;
 }
@@ -71,44 +134,50 @@ body {
 	height: 30%;
 }
 
-.side-bar .main-info label {
+.side-bar .main-info span {
 	color: white;
 	font-family: BehindTS;
 	font-size: 5vh;
 }
 
 .side-bar .main-info img {
-	width: 80%;
-	height: 60%;
+	width: 60%;
+	height: auto;
+
 	border-radius: 50%;
 }
 
 .side-bar .user-options {
-	background-color: white;
-	width: 90%;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	width: 80%;
 	height: 50%;
 }
 
 .side-bar .user-options .user-option {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+	gap: 0.2rem;
     
 	width: 100%;
-	height: 20%;
-	font-size: 100%;
-	border: 2mm ridge rgb(115, 115, 115);
-	cursor: pointer;
-}
+	
+	font-size: 1rem;
+	color: white;
 
-.side-bar .user-options .user-option:hover {
-	color: blueviolet;
+	cursor: pointer;
 }
 
 .side-bar .user-options .user-option a {
 	text-decoration: none;
-	color: black;
+	color: white;
+}
+
+.side-bar .user-options .user-option:hover i, .side-bar .user-options .user-option:hover a{
+	color: rgb(171, 226, 255);
 }
 
 .polls-content {
@@ -119,45 +188,50 @@ body {
     
     width: 70%;
     height: 100vh;
+
+    padding-top: 1rem;
 }
 
 .categories-container {
     position: relative;
     display: flex;
     flex-direction: column;
+	gap: 2rem;
+
     width: 85%;
     background-color: white;
-    border-radius: 7%;
-    padding: 10px 10px 10px 10px;
-    
-    -webkit-box-shadow: 5px 5px 15px 5px #5F5F5F; 
-    box-shadow: 5px 5px 15px 5px #5F5F5F;
+    border-radius: 1rem;
+    padding: 1rem;
+
+    box-shadow: 0.5rem 0.5rem 1rem 0 #DDDDDD;
+
+    cursor: pointer;
 }
 
 .categories-container #categories-table {
     display: grid;
     width: 100%;
     
-    margin-bottom: 100px;
-    
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-auto-rows: min-content;
+    grid-auto-rows: fit-content;
+
+	gap: 0.2rem;
 }
 
 .categories-container button {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    align-self: flex-end;
+	border-radius: inherit;
 }
 
 .polls-container {
 	width: 100%;
 	height: 100%;
-	padding: 10px;
-	overflow-y: scroll;
+	padding: 1rem;
+
+	overflow-y: auto;
 
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-auto-rows: min-content;
 }
 
@@ -166,19 +240,34 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    border: 2px solid #0099cc;
-    border-radius: 5%;
+    border: 0.05rem solid #0099cc;
+    border-radius: 0.5rem;
     background-color: white;
+
+    gap: 1rem;
+    padding: 0.2rem 1rem;
+
+    cursor: pointer;
+}
+
+.category-container * {
+    cursor: pointer;
 }
 
 .friend-request {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    border: 1px solid black;
+    border: 0.05rem solid black;
 }
 
 .friend-request .friend-request-options {
     display: flex;
     flex-direction: row;
+}
+
+@media only screen and (max-width: 768px) {
+	.polls-container {
+		grid-template-columns: 1fr 1fr;
+	}
 }
