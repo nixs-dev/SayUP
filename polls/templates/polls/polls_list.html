@@ -18,7 +18,11 @@
 							{% else %}
 								<input type="radio"/>
 							{% endif %}
-							<label class="poll-option-name">Option</label>
+							{% with op_num_str=op_num|to_str %}
+								{% with op_num_index='op'|add:op_num_str %}
+									<label class="poll-option-name">{{ i|get_attribute:op_num_index }}</label>
+								{% endwith %}
+							{% endwith %}
 						</div>
 
 						<label class="poll-option-percentage">{{ choices|dict_item:i.id|list_item:op_num_offset }}%</label>
