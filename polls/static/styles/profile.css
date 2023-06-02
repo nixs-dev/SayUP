@@ -8,8 +8,10 @@ body {
     align-items: center;
     justify-content: center;
 
-    background: rgb(159,156,213);
-background: radial-gradient(circle, rgba(159,156,213,1) 0%, rgba(87,86,168,1) 51%, rgba(0,12,93,1) 100%);
+    background: url("../imgs/profile_background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     height: 100dvh;
 
