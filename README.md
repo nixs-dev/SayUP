@@ -1,25 +1,42 @@
-# SayUp
+# User Interface
 
 
 Main
 
+![main](readme/main.gif)
 
 
 Login
 
-![login](https://github.com/nixs-dev/Polls/assets/57874746/09aba7e7-c901-4756-ae85-d78a62b40a6b)
+![login](readme/login.png)
 
 
 SignUp
 
-![signup](https://github.com/nixs-dev/Polls/assets/57874746/1447724d-bda3-4bf7-850f-2ed874150cd1)
+![signup](readme/signup.png)
 
 
 Home
 
-![home](https://github.com/nixs-dev/Polls/assets/57874746/67bca9f4-1607-47bd-8c71-612a1c740475)
+![home](readme/home.png)
 
 
 Profile
 
-![profile](https://github.com/nixs-dev/Polls/assets/57874746/df4f5ed4-0367-438f-8b53-b04ff2cd8536)
+![profile](readme/profile.png)
+
+
+Error
+
+![error](readme/404.png)
+
+
+# Getting Started
+
+Install dependencies
+
+```pip install -r requirements.txt```
+
+Start server
+
+```python manage.py runserver --insecure```

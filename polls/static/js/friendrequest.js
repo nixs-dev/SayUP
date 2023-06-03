@@ -1,11 +1,22 @@
+var token;
+
+document.cookie.split(";").forEach((c) => {
+    let key = c.split("=")[0].trim();
+    let value = c.split("=")[1].trim();
+    
+    if(key == "csrftoken") {
+        token = value;
+    }
+});
+
+
 function send_friendrequest(user_id) {
-    let cookie = document.cookie;
-    let token = cookie.substring(cookie.indexOf("=") + 1);
     let status_icon = {
         'SENT': 'fas fa-user-clock',
         'SEND': 'fas fa-paper-plane'
     };
     let data = new FormData();
+    
     data.append("user_id", user_id);
     
     $.ajax({
@@ -25,8 +36,6 @@ function send_friendrequest(user_id) {
 }
 
 function accept_friendrequest(elem, fr_id, accept) {
-    let cookie = document.cookie;
-    let token = cookie.substring(cookie.indexOf("=") + 1);
     let data = new FormData();
     data.append("fr_id", fr_id);
     data.append("accept", accept);

@@ -6,7 +6,7 @@
         <div id="pendent-friend-request">
             <p>Você possui uma requisição de amizade pendente de {{ pendent_friend_request.sender.username }}
             </p>
-            <div class="d-flex flex-row">
+            <div class="d-flex flex-row gap-1">
                 <button class="accept-button" onclick="accept_friendrequest(this.parentNode.parentNode, {{ pendent_friend_request.id }}, true)"><i class="fas fa-check-circle"></i></button>
                 <button class="reject-button" onclick="accept_friendrequest(this.parentNode.parentNode, {{ pendent_friend_request.id }}, false)"><i class="fas fa-ban"></i></button>
             </div>
