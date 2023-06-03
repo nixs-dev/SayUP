@@ -23,3 +23,7 @@ Home
 Profile
 
 ![profile](https://github.com/nixs-dev/Polls/assets/57874746/df4f5ed4-0367-438f-8b53-b04ff2cd8536)
+
+Error
+
+![404](https://github.com/nixs-dev/Polls/assets/57874746/a859529e-8e9d-46c5-99a3-1b46bb393c93)
