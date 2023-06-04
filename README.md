@@ -23,6 +23,7 @@ Home
 
 Profile
 
+<<<<<<< HEAD
 ![profile](readme/profile.png)
 
 
@@ -40,3 +41,10 @@ Install dependencies
 Start server
 
 ```python manage.py runserver --insecure```
+=======
+![profile](https://github.com/nixs-dev/Polls/assets/57874746/af3a96ad-1410-467d-93b0-159f4ae0500a)
+
+Error
+
+![404](https://github.com/nixs-dev/Polls/assets/57874746/a859529e-8e9d-46c5-99a3-1b46bb393c93)
+>>>>>>> 043c9606761fd66ba2c5954347a5d9ddf7ebd0f9
